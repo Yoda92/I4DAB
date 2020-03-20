@@ -1,4 +1,4 @@
-namespace DAB_assignment_2.TopLayer.Domain
+namespace Assignment2.TopLayer.Domain
 {
     public class StudentExercise
     {

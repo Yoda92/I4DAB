@@ -1,7 +1,7 @@
-using DAB_assignment_2.TopLayer.RepositoryInterfaces;
+using Assignment2.TopLayer.RepositoryInterfaces;
 using System;
 
-namespace DAB_assignment_2.TopLayer
+namespace Assignment2.TopLayer
 {
     public interface IUnitOfWork : IDisposable
     {

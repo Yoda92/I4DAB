@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace DAB_assignment_2.BottomLayerPersistenceLogic
+namespace Assignment2.BottomLayerPersistenceLogic
 {
     public class StudentHelperContext : DbContext
     {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlServer("");
+        optionsBuilder.UseSqlServer("Data Source=DESKTOP-BL1CI2M;Initial Catalog=HelpRequestDB;Integrated Security=True");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

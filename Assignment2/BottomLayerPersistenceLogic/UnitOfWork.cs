@@ -1,7 +1,7 @@
-using DAB_assignment_2.TopLayer;
-using DAB_assignment_2.TopLayer.RepositoryInterfaces;
+using Assignment2.TopLayer;
+using Assignment2.TopLayer.RepositoryInterfaces;
 
-namespace DAB_assignment_2.BottomLayerPersistenceLogic
+namespace Assignment2.BottomLayerPersistenceLogic
 {
     public class UnitOfWork : IUnitOfWork
     {

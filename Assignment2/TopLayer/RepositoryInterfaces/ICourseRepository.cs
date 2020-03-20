@@ -1,4 +1,4 @@
-namespace DAB_assignment_2.TopLayer.RepositoryInterfaces
+namespace Assignment2.TopLayer.RepositoryInterfaces
 {
     public interface ICourseRepository
     {

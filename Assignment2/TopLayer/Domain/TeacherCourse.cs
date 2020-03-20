@@ -1,4 +1,4 @@
-namespace DAB_assignment_2.TopLayer.Domain
+namespace Assignment2.TopLayer.Domain
 {
     public class TeacherCourse
     {
@@ -7,5 +7,6 @@ namespace DAB_assignment_2.TopLayer.Domain
 
         public uint CourseID { get; set; }
         public Course Course { get; set; }
+        
     }
 }

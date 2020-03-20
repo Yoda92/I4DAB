@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Linq.Expressions;
-using DAB_assignment_2.TopLayer.RepositoryInterfaces;
+using Assignment2.TopLayer.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace DAB_assignment_2.BottomLayerPersistenceLogic.Repositories
+namespace Assignment2.BottomLayerPersistenceLogic.Repositories
 {
     public class Repository<EntityType> : IRepository<EntityType> where EntityType : class
     {

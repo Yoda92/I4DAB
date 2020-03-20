@@ -1,7 +1,7 @@
-using DAB_assignment_2.TopLayer.Domain;
+using Assignment2.TopLayer.Domain;
 using System.Collections.Generic;
 
-namespace DAB_assignment_2.TopLayer.RepositoryInterfaces
+namespace Assignment2.TopLayer.RepositoryInterfaces
 {
     public interface IAssignmentRepository
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Linq.Expressions;
 
-namespace DAB_assignment_2.TopLayer.RepositoryInterfaces
+namespace Assignment2.TopLayer.RepositoryInterfaces
 {
     public interface IRepository<EntityType> where EntityType : class
     {

@@ -12,14 +12,5 @@ namespace Assignment2
             {
             }
         }
-
-    }
-
-    public class Context : DbContext
-    {
-        protected override void OnConfiguring(DbContextOptionsBuilder ob)
-        {
-            ob.UseSqlServer("Data Source=DESKTOP-BL1CI2M;Initial Catalog=HelpRequestDB;Integrated Security=True");
-        }
     }
 }
