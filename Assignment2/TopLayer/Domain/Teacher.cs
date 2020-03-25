@@ -8,10 +8,10 @@ namespace Assignment2.TopLayer.Domain
         public string Name { get; set; }
 
         //May be assigned to help with either an exercise or an assignment
-        public uint ExerciseID { get; set; } 
+        public uint? ExerciseID { get; set; } 
         public Exercise Exercise { get; set; }
 
-        public uint AssignmentID { get; set; }
+        public uint? AssignmentID { get; set; }
         public Assignment Assignment { get; set; }
 
         public uint AuidOfStudentBeingAssisted { get; set; }

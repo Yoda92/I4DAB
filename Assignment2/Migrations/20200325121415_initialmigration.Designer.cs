@@ -3,14 +3,16 @@ using Assignment2.BottomLayerPersistenceLogic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(StudentHelperContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200325121415_initialmigration")]
+    partial class initialmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,13 +176,13 @@ namespace Assignment2.Migrations
                     b.Property<string>("AUID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<long>("AssignmentID")
+                    b.Property<long?>("AssignmentID")
                         .HasColumnType("bigint");
 
                     b.Property<long>("AuidOfStudentBeingAssisted")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ExerciseID")
+                    b.Property<long?>("ExerciseID")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
@@ -287,15 +289,11 @@ namespace Assignment2.Migrations
                 {
                     b.HasOne("Assignment2.TopLayer.Domain.Assignment", "Assignment")
                         .WithMany()
-                        .HasForeignKey("AssignmentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AssignmentID");
 
                     b.HasOne("Assignment2.TopLayer.Domain.Exercise", "Exercise")
                         .WithMany()
-                        .HasForeignKey("ExerciseID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExerciseID");
 
                     b.HasOne("Assignment2.TopLayer.Domain.Student", "Student")
                         .WithMany()

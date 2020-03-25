@@ -2,7 +2,7 @@
 
 namespace Assignment2.Migrations
 {
-    public partial class primaryKeysOnStudentAndTeacher : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -171,8 +171,8 @@ namespace Assignment2.Migrations
                 {
                     AUID = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    ExerciseID = table.Column<long>(nullable: false),
-                    AssignmentID = table.Column<long>(nullable: false),
+                    ExerciseID = table.Column<long>(nullable: true),
+                    AssignmentID = table.Column<long>(nullable: true),
                     AuidOfStudentBeingAssisted = table.Column<long>(nullable: false),
                     StudentAUID = table.Column<string>(nullable: true)
                 },
@@ -184,13 +184,13 @@ namespace Assignment2.Migrations
                         column: x => x.AssignmentID,
                         principalTable: "Assignments",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Teacher_Exercises_ExerciseID",
                         column: x => x.ExerciseID,
                         principalTable: "Exercises",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Teacher_Students_StudentAUID",
                         column: x => x.StudentAUID,
