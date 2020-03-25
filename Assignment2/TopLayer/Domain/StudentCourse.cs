@@ -2,7 +2,7 @@ namespace Assignment2.TopLayer.Domain
 {
     public class StudentCourse
     {
-        public uint StudentID { get; set; }
+        public string StudentAUID { get; set; }
         public Student Student { get; set; }
 
         public uint CourseID { get; set; }

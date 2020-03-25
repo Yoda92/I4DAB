@@ -5,6 +5,8 @@ namespace Assignment2.BottomLayerPersistenceLogic
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private StudentHelperContext _studentHelperContext = new StudentHelperContext();
+
         public IAssignmentRepository Assignments => throw new System.NotImplementedException();
 
         public ICourseRepository Courses => throw new System.NotImplementedException();

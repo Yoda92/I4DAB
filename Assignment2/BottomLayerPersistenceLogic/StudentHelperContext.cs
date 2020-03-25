@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Assignment2.TopLayer.Domain;
-
+using Assignment2.BottomLayerPersistenceLogic.EntityConfigurations;
 
 namespace Assignment2.BottomLayerPersistenceLogic
 {
@@ -18,11 +18,18 @@ namespace Assignment2.BottomLayerPersistenceLogic
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-BL1CI2M;Initial Catalog=HelpRequestDB;Integrated Security=True");
+            optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("StudentHelperDB"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.ApplyConfigurationsFromAssembly()
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new StudentConfigurations());
+            modelBuilder.ApplyConfiguration(new TeacherConfigurations());
+            modelBuilder.ApplyConfiguration(new StudentAssignmentConfigurations());
+            modelBuilder.ApplyConfiguration(new StudentCourseConfigurations());
+            modelBuilder.ApplyConfiguration(new StudentExerciseConfigurations());
+            modelBuilder.ApplyConfiguration(new TeacherCourseConfigurations());
         }
 
         }
