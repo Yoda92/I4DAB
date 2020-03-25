@@ -9,7 +9,6 @@ namespace Assignment2.TopLayer
         IAssignmentRepository Assignments {get; }
         ICourseRepository Courses { get; }
         IExerciseRepository Exercises { get; }
-        ILectureRepository Lectures { get; }
         IStudentRepository Students { get; }
         ITeacherRepository Teachers { get; }
 

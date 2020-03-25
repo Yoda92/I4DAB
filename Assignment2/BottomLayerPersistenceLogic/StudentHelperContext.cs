@@ -11,7 +11,6 @@ namespace Assignment2.BottomLayerPersistenceLogic
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teacher { get; set; }
 
@@ -28,7 +27,6 @@ namespace Assignment2.BottomLayerPersistenceLogic
             modelBuilder.ApplyConfiguration(new TeacherConfigurations());
             modelBuilder.ApplyConfiguration(new StudentAssignmentConfigurations());
             modelBuilder.ApplyConfiguration(new StudentCourseConfigurations());
-            modelBuilder.ApplyConfiguration(new StudentExerciseConfigurations());
             modelBuilder.ApplyConfiguration(new TeacherCourseConfigurations());
             modelBuilder.ApplyConfiguration(new ExerciseConfigurations());
         }
