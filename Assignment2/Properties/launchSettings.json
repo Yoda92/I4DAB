@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Assignment2": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "StudentHelperDBconnString": "Data Source=DESKTOP-BL1CI2M;Initial Catalog=HelpRequestDB;Integrated Security=True"
+      }
+    }
+  }
+}
