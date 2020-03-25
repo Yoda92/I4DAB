@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Linq.Expressions;
 using Assignment2.TopLayer.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,32 +19,23 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
 
         public void Add(EntityType entity)
         {
-            throw new NotImplementedException();
+            Context.Set<EntityType>().Add(entity);
         }
 
         public IEnumerable Find(Expression<Func<EntityType, bool>> lambdaExpression)
         {
-            throw new NotImplementedException();
+            return Context.Set<EntityType>().Where(lambdaExpression);
         }
 
         public IEnumerable GetAll()
         {
-            throw new NotImplementedException();
+            return Context.Set<EntityType>().ToList();
         }
 
-        public EntityType GetByIntegerID(uint ID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public EntityType GetByStringID(uint ID)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Remove(EntityType entity)
         {
-            throw new NotImplementedException();
+            Context.Set<EntityType>().Remove(entity);
         }
     }
 }
