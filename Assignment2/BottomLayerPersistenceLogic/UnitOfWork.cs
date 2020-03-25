@@ -19,12 +19,12 @@ namespace Assignment2.BottomLayerPersistenceLogic
 
         public int Complete()
         {
-            throw new System.NotImplementedException();
+            return _studentHelperContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            _studentHelperContext.Dispose();
         }
     }
 }
