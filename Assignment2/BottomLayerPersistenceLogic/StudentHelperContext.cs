@@ -11,7 +11,6 @@ namespace Assignment2.BottomLayerPersistenceLogic
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teacher { get; set; }
 

@@ -8,13 +8,13 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<StudentCourse> builder)
         {
             builder.HasKey(s => new{ s.StudentAUID, s.CourseID });
-            builder.HasOne(sa => sa.Student)
+            builder.HasOne(sc => sc.Student)
                 .WithMany(s => s.StudentCourses)
-                .HasForeignKey(sa => sa.StudentAUID);
+                .HasForeignKey(sc => sc.StudentAUID);
 
-            builder.HasOne(sa => sa.Course)
+            builder.HasOne(sc => sc.Course)
                 .WithMany(a => a.StudentsAttending)
-                .HasForeignKey(sa => sa.CourseID);
+                .HasForeignKey(sc => sc.CourseID);
         }
     }
 }
