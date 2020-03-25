@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(StudentHelperContext))]
-    [Migration("20200325121415_initialmigration")]
-    partial class initialmigration
+    [Migration("20200325143829_RebuildDBCauseOfError")]
+    partial class RebuildDBCauseOfError
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,14 @@ namespace Assignment2.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TeacherAUID")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ID");
 
                     b.HasIndex("CourseID");
+
+                    b.HasIndex("TeacherAUID");
 
                     b.ToTable("Assignments");
                 });
@@ -51,9 +56,6 @@ namespace Assignment2.Migrations
                     b.Property<long>("AssignmentID")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("LectureID")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -64,49 +66,32 @@ namespace Assignment2.Migrations
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.Exercise", b =>
                 {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<long>("Number")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Lecture")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("LectureID")
-                        .HasColumnType("bigint");
+                    b.Property<string>("HelpWhere")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.Property<string>("TeacherAUID")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("LectureID");
+                    b.HasKey("Number", "Lecture");
+
+                    b.HasIndex("TeacherAUID");
 
                     b.ToTable("Exercises");
-                });
-
-            modelBuilder.Entity("Assignment2.TopLayer.Domain.Lecture", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("CourseID")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CourseID");
-
-                    b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.Student", b =>
                 {
                     b.Property<string>("AUID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("CurrentSemester")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -118,22 +103,17 @@ namespace Assignment2.Migrations
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.StudentAssignment", b =>
                 {
-                    b.Property<long>("StudentAUID")
-                        .HasColumnType("bigint");
+                    b.Property<string>("StudentAUID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<long>("AssignmentID")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("StudentAUID1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("StudentAUID", "AssignmentID");
 
                     b.HasIndex("AssignmentID");
 
-                    b.HasIndex("StudentAUID1");
-
-                    b.ToTable("StudentAssignment");
+                    b.ToTable("StudentAssignments");
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.StudentCourse", b =>
@@ -144,31 +124,35 @@ namespace Assignment2.Migrations
                     b.Property<long>("CourseID")
                         .HasColumnType("bigint");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("Semester")
+                        .HasColumnType("bigint");
+
                     b.HasKey("StudentAUID", "CourseID");
 
                     b.HasIndex("CourseID");
 
-                    b.ToTable("StudentCourse");
+                    b.ToTable("StudentCourses");
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.StudentExercise", b =>
                 {
-                    b.Property<long>("StudentAUID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ExerciseID")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("StudentAUID1")
+                    b.Property<string>("StudentAUID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("StudentAUID", "ExerciseID");
+                    b.Property<long>("ExerciseLecture")
+                        .HasColumnType("bigint");
 
-                    b.HasIndex("ExerciseID");
+                    b.Property<long>("ExerciseNumber")
+                        .HasColumnType("bigint");
 
-                    b.HasIndex("StudentAUID1");
+                    b.HasKey("StudentAUID", "ExerciseLecture", "ExerciseNumber");
 
-                    b.ToTable("StudentExercise");
+                    b.HasIndex("ExerciseLecture", "ExerciseNumber");
+
+                    b.ToTable("StudentExercises");
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.Teacher", b =>
@@ -176,28 +160,10 @@ namespace Assignment2.Migrations
                     b.Property<string>("AUID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<long?>("AssignmentID")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("AuidOfStudentBeingAssisted")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("ExerciseID")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StudentAUID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("AUID");
-
-                    b.HasIndex("AssignmentID");
-
-                    b.HasIndex("ExerciseID");
-
-                    b.HasIndex("StudentAUID");
 
                     b.ToTable("Teacher");
                 });
@@ -214,7 +180,7 @@ namespace Assignment2.Migrations
 
                     b.HasIndex("CourseID");
 
-                    b.ToTable("TeacherCourse");
+                    b.ToTable("TeacherCourses");
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.Assignment", b =>
@@ -224,24 +190,17 @@ namespace Assignment2.Migrations
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Assignment2.TopLayer.Domain.Teacher", "Teacher")
+                        .WithMany("Assignments")
+                        .HasForeignKey("TeacherAUID");
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.Exercise", b =>
                 {
-                    b.HasOne("Assignment2.TopLayer.Domain.Lecture", "Lecture")
-                        .WithMany()
-                        .HasForeignKey("LectureID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Assignment2.TopLayer.Domain.Lecture", b =>
-                {
-                    b.HasOne("Assignment2.TopLayer.Domain.Course", "Course")
-                        .WithMany("Lectures")
-                        .HasForeignKey("CourseID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Assignment2.TopLayer.Domain.Teacher", "Teacher")
+                        .WithMany("Exercises")
+                        .HasForeignKey("TeacherAUID");
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.StudentAssignment", b =>
@@ -253,8 +212,10 @@ namespace Assignment2.Migrations
                         .IsRequired();
 
                     b.HasOne("Assignment2.TopLayer.Domain.Student", "Student")
-                        .WithMany("StudentAssignment")
-                        .HasForeignKey("StudentAUID1");
+                        .WithMany("StudentAssignments")
+                        .HasForeignKey("StudentAUID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.StudentCourse", b =>
@@ -274,30 +235,17 @@ namespace Assignment2.Migrations
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.StudentExercise", b =>
                 {
-                    b.HasOne("Assignment2.TopLayer.Domain.Exercise", "Exercise")
-                        .WithMany("StudentExercise")
-                        .HasForeignKey("ExerciseID")
+                    b.HasOne("Assignment2.TopLayer.Domain.Student", "Student")
+                        .WithMany("StudentExercises")
+                        .HasForeignKey("StudentAUID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Assignment2.TopLayer.Domain.Student", "Student")
-                        .WithMany("StudentExercise")
-                        .HasForeignKey("StudentAUID1");
-                });
-
-            modelBuilder.Entity("Assignment2.TopLayer.Domain.Teacher", b =>
-                {
-                    b.HasOne("Assignment2.TopLayer.Domain.Assignment", "Assignment")
-                        .WithMany()
-                        .HasForeignKey("AssignmentID");
-
                     b.HasOne("Assignment2.TopLayer.Domain.Exercise", "Exercise")
-                        .WithMany()
-                        .HasForeignKey("ExerciseID");
-
-                    b.HasOne("Assignment2.TopLayer.Domain.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentAUID");
+                        .WithMany("StudentExercises")
+                        .HasForeignKey("ExerciseLecture", "ExerciseNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Assignment2.TopLayer.Domain.TeacherCourse", b =>

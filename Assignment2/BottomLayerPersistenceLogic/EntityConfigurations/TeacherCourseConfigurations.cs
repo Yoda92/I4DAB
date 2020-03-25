@@ -10,10 +10,10 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
             builder.HasKey(tc => new{ tc.TeacherAUID, tc.CourseID });
             builder.HasOne(tc => tc.Teacher)
                 .WithMany(t => t.ResponsibleForTheseCourses)
-                .HasForeignKey(tc => tc.CourseID);
+                .HasForeignKey(tc => tc.TeacherAUID);
             builder.HasOne(tc => tc.Course)
                 .WithMany(c => c.TeachersResponsible)
-                .HasForeignKey(tc => tc.TeacherAUID);
+                .HasForeignKey(tc => tc.CourseID);
         }
     }
 }

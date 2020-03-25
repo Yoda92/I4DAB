@@ -16,6 +16,7 @@ namespace Assignment2.BottomLayerPersistenceLogic
         public DbSet <StudentCourse> StudentCourses { get; set; }
         public DbSet<Teacher> Teacher { get; set; }
         public DbSet <TeacherCourse> TeacherCourses { get; set; }
+        public DbSet<StudentExercise> StudentExercises { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,6 +35,7 @@ namespace Assignment2.BottomLayerPersistenceLogic
             modelBuilder.ApplyConfiguration(new StudentCourseConfigurations());
             modelBuilder.ApplyConfiguration(new TeacherCourseConfigurations());
             modelBuilder.ApplyConfiguration(new ExerciseConfigurations());
+            modelBuilder.ApplyConfiguration(new StudentExerciseConfigurations());
         }
 
         }

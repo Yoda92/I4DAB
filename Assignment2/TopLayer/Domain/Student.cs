@@ -9,7 +9,7 @@ namespace Assignment2.TopLayer.Domain
         
 
         public List<StudentCourse> StudentCourses { get; set; }
-        public List<Exercise> Exercises { get; set; }
+        public List<StudentExercise> StudentExercises { get; set; }
         public List<StudentAssignment> StudentAssignments { get; set; }
     }
 }
