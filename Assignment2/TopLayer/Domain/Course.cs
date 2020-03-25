@@ -11,11 +11,6 @@ namespace Assignment2.TopLayer.Domain
         public uint AssignmentID { get; set; }
         public List<Assignment> Assignments { get; set; }
 
-
-        public uint LectureID { get; set; }
-        public List<Lecture> Lectures { get; set; }
-
-
         public List<StudentCourse> StudentsAttending { get; set; } 
         
 

@@ -30,6 +30,7 @@ namespace Assignment2.BottomLayerPersistenceLogic
             modelBuilder.ApplyConfiguration(new StudentCourseConfigurations());
             modelBuilder.ApplyConfiguration(new StudentExerciseConfigurations());
             modelBuilder.ApplyConfiguration(new TeacherCourseConfigurations());
+            modelBuilder.ApplyConfiguration(new ExerciseConfigurations());
         }
 
         }
