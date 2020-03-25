@@ -27,6 +27,7 @@ namespace Assignment2.BottomLayerPersistenceLogic
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new AssignmentConfigurations());
+            modelBuilder.ApplyConfiguration(new CourseConfigurations());
             modelBuilder.ApplyConfiguration(new StudentConfigurations());
             modelBuilder.ApplyConfiguration(new TeacherConfigurations());
             modelBuilder.ApplyConfiguration(new StudentAssignmentConfigurations());
