@@ -62,7 +62,7 @@ namespace Assignment2
             Console.WriteLine("|| CreateAssignment          || Creates a new assignment.                          ||");
             Console.WriteLine("|| CreateExercise            || Creates a new exercise.                            ||");
             // Console.WriteLine("Create Review"); ????
-            Console.WriteLine("|| Create Help Request       || Creates a new help request.                        ||");
+            Console.WriteLine("|| CreateHelpRequest         || Creates a new help request.                        ||");
             Console.WriteLine("|| GetHelpRequestsStudent    || Shows all open help request given a student.       ||");
             Console.WriteLine("|| GetHelpRequestsTeacher    || Creates a new course.                              ||");
             Console.WriteLine("-------------------------------------------------------------------------------------");
@@ -103,9 +103,15 @@ namespace Assignment2
         {
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
+                System.Console.WriteLine("Current help requests in assignments:");
                 foreach (StudentAssignment element in _UnitOfWork.HelpRequests.GetStudentAssignments(studentId))
                 {
-                    System.Console.WriteLine("Assignment: " + element.AssignmentID);
+                    System.Console.WriteLine("Assignment ID: " + element.AssignmentID);
+                }
+                System.Console.WriteLine("Current help requests in exercises:");
+                foreach (StudentExercise element in _UnitOfWork.HelpRequests.GetStudentExercises(studentId))
+                {
+                    System.Console.WriteLine("Exercise lecture,number: " + element.ExerciseLecture + "," + element.ExerciseNumber);
                 }
             }
         }

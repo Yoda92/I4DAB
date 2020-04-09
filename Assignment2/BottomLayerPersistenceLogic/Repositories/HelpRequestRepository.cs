@@ -19,7 +19,11 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
         public IEnumerable<StudentAssignment> GetStudentAssignments(string studentId)
         {
             return Context.StudentAssignments.Where(s => s.StudentAUID == studentId).ToList();
-            // throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<StudentExercise> GetStudentExercises(string studentId)
+        {
+            return Context.StudentExercises.Where(s => s.StudentAUID == studentId).ToList();
         }
     }
 }
