@@ -8,6 +8,32 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200320111707_InitialCreate.cs" />
     <Compile Remove="Migrations\20200320111707_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200325143829_RebuildDBCauseOfError.cs" />
+    <Compile Remove="Migrations\20200325143829_RebuildDBCauseOfError.Designer.cs" />
+    <Compile Remove="Migrations\20200409102429_BrushUpDB.cs" />
+    <Compile Remove="Migrations\20200409102429_BrushUpDB.Designer.cs" />
+    <Compile Remove="Migrations\20200409120247_BrushUpDB2.cs" />
+    <Compile Remove="Migrations\20200409120247_BrushUpDB2.Designer.cs" />
+    <Compile Remove="Migrations\20200409121005_BrushUpDB.cs" />
+    <Compile Remove="Migrations\20200409121005_BrushUpDB.Designer.cs" />
+    <Compile Remove="Migrations\20200409122806_BrushUpDB.cs" />
+    <Compile Remove="Migrations\20200409122806_BrushUpDB.Designer.cs" />
+    <Compile Remove="Migrations\20200409140251_AddTestData.cs" />
+    <Compile Remove="Migrations\20200409140251_AddTestData.Designer.cs" />
+    <Compile Remove="Migrations\20200409140557_AddTestData.cs" />
+    <Compile Remove="Migrations\20200409140557_AddTestData.Designer.cs" />
+    <Compile Remove="Migrations\20200409141332_MoreTestData.cs" />
+    <Compile Remove="Migrations\20200409141332_MoreTestData.Designer.cs" />
+    <Compile Remove="Migrations\20200409141842_AddTestData.cs" />
+    <Compile Remove="Migrations\20200409141842_AddTestData.Designer.cs" />
+    <Compile Remove="Migrations\20200409142220_MoreAddTestData.cs" />
+    <Compile Remove="Migrations\20200409142220_MoreAddTestData.Designer.cs" />
+    <Compile Remove="Migrations\20200409142649_AddTestData.cs" />
+    <Compile Remove="Migrations\20200409142649_AddTestData.Designer.cs" />
+    <Compile Remove="Migrations\20200409143031_RebuildCauseOfError2.cs" />
+    <Compile Remove="Migrations\20200409143031_RebuildCauseOfError2.Designer.cs" />
+    <Compile Remove="Migrations\20200409151529_RebuildCauseOfError3.cs" />
+    <Compile Remove="Migrations\20200409151529_RebuildCauseOfError3.Designer.cs" />
   </ItemGroup>
   
   <ItemGroup>
@@ -20,10 +46,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Migrations" />
   </ItemGroup>
 
 </Project>

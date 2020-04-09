@@ -6,8 +6,6 @@ namespace Assignment2.TopLayer.Domain
     {
         public string AUID { get; set; }
         public string Name { get; set; }
-        
-
         public List<StudentCourse> StudentCourses { get; set; }
         public List<StudentExercise> StudentExercises { get; set; }
         public List<StudentAssignment> StudentAssignments { get; set; }

@@ -7,13 +7,7 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Assignment> builder)
         {
-            builder.HasOne(a => a.Teacher)
-                    .WithMany(t => t.Assignments)
-                    .HasForeignKey(a => a.TeacherAUID);
-
-            builder.HasOne(a => a.Course)
-                    .WithMany(c => c.Assignments)
-                    .HasForeignKey(a => a.CourseID);
+            builder.HasKey(a => a.AssignmentID);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Assignment2.Migrations
 {
-    public partial class RebuildDBCauseOfError : Migration
+    public partial class RebuildCauseOfError4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,14 +10,13 @@ namespace Assignment2.Migrations
                 name: "Courses",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Abbreviation = table.Column<string>(nullable: true),
-                    AssignmentID = table.Column<long>(nullable: false)
+                    CourseID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Courses", x => x.ID);
+                    table.PrimaryKey("PK_Courses", x => x.CourseID);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,9 +48,9 @@ namespace Assignment2.Migrations
                 columns: table => new
                 {
                     StudentAUID = table.Column<string>(nullable: false),
-                    CourseID = table.Column<long>(nullable: false),
+                    CourseID = table.Column<int>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    Semester = table.Column<long>(nullable: false)
+                    Semester = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,7 +59,7 @@ namespace Assignment2.Migrations
                         name: "FK_StudentCourses_Courses_CourseID",
                         column: x => x.CourseID,
                         principalTable: "Courses",
-                        principalColumn: "ID",
+                        principalColumn: "CourseID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StudentCourses_Students_StudentAUID",
@@ -74,19 +73,19 @@ namespace Assignment2.Migrations
                 name: "Assignments",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    AssignmentID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TeacherAUID = table.Column<string>(nullable: true),
-                    CourseID = table.Column<long>(nullable: false)
+                    CourseID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Assignments", x => x.ID);
+                    table.PrimaryKey("PK_Assignments", x => x.AssignmentID);
                     table.ForeignKey(
                         name: "FK_Assignments_Courses_CourseID",
                         column: x => x.CourseID,
                         principalTable: "Courses",
-                        principalColumn: "ID",
+                        principalColumn: "CourseID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Assignments_Teacher_TeacherAUID",
@@ -100,9 +99,8 @@ namespace Assignment2.Migrations
                 name: "Exercises",
                 columns: table => new
                 {
-                    Lecture = table.Column<long>(nullable: false),
-                    Number = table.Column<long>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    Lecture = table.Column<int>(nullable: false),
+                    Number = table.Column<int>(nullable: false),
                     HelpWhere = table.Column<string>(nullable: true),
                     TeacherAUID = table.Column<string>(nullable: true)
                 },
@@ -122,7 +120,7 @@ namespace Assignment2.Migrations
                 columns: table => new
                 {
                     TeacherAUID = table.Column<string>(nullable: false),
-                    CourseID = table.Column<long>(nullable: false)
+                    CourseID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,7 +129,7 @@ namespace Assignment2.Migrations
                         name: "FK_TeacherCourses_Courses_CourseID",
                         column: x => x.CourseID,
                         principalTable: "Courses",
-                        principalColumn: "ID",
+                        principalColumn: "CourseID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TeacherCourses_Teacher_TeacherAUID",
@@ -146,7 +144,7 @@ namespace Assignment2.Migrations
                 columns: table => new
                 {
                     StudentAUID = table.Column<string>(nullable: false),
-                    AssignmentID = table.Column<long>(nullable: false)
+                    AssignmentID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,7 +153,7 @@ namespace Assignment2.Migrations
                         name: "FK_StudentAssignments_Assignments_AssignmentID",
                         column: x => x.AssignmentID,
                         principalTable: "Assignments",
-                        principalColumn: "ID",
+                        principalColumn: "AssignmentID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StudentAssignments_Students_StudentAUID",
@@ -170,8 +168,8 @@ namespace Assignment2.Migrations
                 columns: table => new
                 {
                     StudentAUID = table.Column<string>(nullable: false),
-                    ExerciseNumber = table.Column<long>(nullable: false),
-                    ExerciseLecture = table.Column<long>(nullable: false)
+                    ExerciseNumber = table.Column<int>(nullable: false),
+                    ExerciseLecture = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -183,11 +181,111 @@ namespace Assignment2.Migrations
                         principalColumn: "AUID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentExercises_Exercises_ExerciseLecture_ExerciseNumber",
-                        columns: x => new { x.ExerciseLecture, x.ExerciseNumber },
+                        name: "FK_StudentExercises_Exercises_ExerciseNumber_ExerciseLecture",
+                        columns: x => new { x.ExerciseNumber, x.ExerciseLecture },
                         principalTable: "Exercises",
                         principalColumns: new[] { "Number", "Lecture" },
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "CourseID", "Name" },
+                values: new object[,]
+                {
+                    { 1, "DAB" },
+                    { 2, "GUI" },
+                    { 3, "SWD" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Students",
+                columns: new[] { "AUID", "Name" },
+                values: new object[,]
+                {
+                    { "au111111", "Anders" },
+                    { "au222222", "Lau" },
+                    { "au333333", "Christoffer" },
+                    { "au444444", "David" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Teacher",
+                columns: new[] { "AUID", "Name" },
+                values: new object[,]
+                {
+                    { "au555555", "Arnold Ananas" },
+                    { "au666666", "Bob Bodega" },
+                    { "au777777", "Clement Citron" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Assignments",
+                columns: new[] { "AssignmentID", "CourseID", "TeacherAUID" },
+                values: new object[,]
+                {
+                    { 3, 3, "au777777" },
+                    { 2, 2, "au666666" },
+                    { 1, 1, "au555555" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Exercises",
+                columns: new[] { "Number", "Lecture", "HelpWhere", "TeacherAUID" },
+                values: new object[,]
+                {
+                    { 2, 1, "Benjamin", "au666666" },
+                    { 1, 1, "Benjamin", "au555555" },
+                    { 3, 1, "Benjamin", "au777777" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StudentCourses",
+                columns: new[] { "StudentAUID", "CourseID", "IsActive", "Semester" },
+                values: new object[,]
+                {
+                    { "au111111", 1, false, 0 },
+                    { "au444444", 3, false, 0 },
+                    { "au444444", 1, false, 0 },
+                    { "au444444", 2, false, 0 },
+                    { "au333333", 2, false, 0 },
+                    { "au333333", 1, false, 0 },
+                    { "au222222", 3, false, 0 },
+                    { "au222222", 2, false, 0 },
+                    { "au222222", 1, false, 0 },
+                    { "au111111", 3, false, 0 },
+                    { "au111111", 2, false, 0 },
+                    { "au333333", 3, false, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TeacherCourses",
+                columns: new[] { "TeacherAUID", "CourseID" },
+                values: new object[,]
+                {
+                    { "au555555", 1 },
+                    { "au666666", 2 },
+                    { "au777777", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StudentAssignments",
+                columns: new[] { "StudentAUID", "AssignmentID" },
+                values: new object[,]
+                {
+                    { "au111111", 1 },
+                    { "au111111", 2 },
+                    { "au111111", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StudentExercises",
+                columns: new[] { "StudentAUID", "ExerciseLecture", "ExerciseNumber" },
+                values: new object[,]
+                {
+                    { "au111111", 1, 1 },
+                    { "au222222", 1, 2 },
+                    { "au333333", 1, 3 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -216,9 +314,9 @@ namespace Assignment2.Migrations
                 column: "CourseID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentExercises_ExerciseLecture_ExerciseNumber",
+                name: "IX_StudentExercises_ExerciseNumber_ExerciseLecture",
                 table: "StudentExercises",
-                columns: new[] { "ExerciseLecture", "ExerciseNumber" });
+                columns: new[] { "ExerciseNumber", "ExerciseLecture" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeacherCourses_CourseID",

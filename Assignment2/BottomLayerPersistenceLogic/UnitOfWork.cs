@@ -1,3 +1,4 @@
+using Assignment2.BottomLayerPersistenceLogic.Repositories;
 using Assignment2.TopLayer;
 using Assignment2.TopLayer.RepositoryInterfaces;
 
@@ -5,26 +6,32 @@ namespace Assignment2.BottomLayerPersistenceLogic
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private StudentHelperContext _studentHelperContext = new StudentHelperContext();
-
-        public IAssignmentRepository Assignments => throw new System.NotImplementedException();
-
-        public ICourseRepository Courses => throw new System.NotImplementedException();
-
-        public IExerciseRepository Exercises => throw new System.NotImplementedException();
-
-        public IStudentRepository Students => throw new System.NotImplementedException();
-
-        public ITeacherRepository Teachers => throw new System.NotImplementedException();
+        private StudentHelperContext _StudentHelperContext;
+        public UnitOfWork(StudentHelperContext context)
+        {
+            _StudentHelperContext = context;
+            Assignments = new AssignmentRepository(_StudentHelperContext);
+            Courses = new CourseRepository(_StudentHelperContext);
+            Exercises = new ExerciseRepository(_StudentHelperContext);
+            Students = new StudentRepository(_StudentHelperContext);
+            Teachers = new TeacherRepository(_StudentHelperContext);
+            HelpRequests = new HelpRequestRepository(_StudentHelperContext);
+        }
+        public IAssignmentRepository Assignments { get; }
+        public ICourseRepository Courses { get; }
+        public IExerciseRepository Exercises { get; }
+        public IStudentRepository Students { get; }
+        public ITeacherRepository Teachers { get; }
+        public IHelpRequestRepository HelpRequests { get; }
 
         public int Complete()
         {
-            return _studentHelperContext.SaveChanges();
+            return _StudentHelperContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            _studentHelperContext.Dispose();
+            _StudentHelperContext.Dispose();
         }
     }
 }

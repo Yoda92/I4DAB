@@ -11,7 +11,6 @@ namespace Assignment2.TopLayer.Domain
 
         public List<Assignment> Assignments { get; set; }
 
-
         public List<TeacherCourse> ResponsibleForTheseCourses { get; set; } 
     }
 }

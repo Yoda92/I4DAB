@@ -13,7 +13,7 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
                 .HasForeignKey(se => se.StudentAUID);
             builder.HasOne(se => se.Exercise)
                 .WithMany(e => e.StudentExercises)
-                .HasForeignKey(se => new {se.ExerciseLecture, se.ExerciseNumber});
+                .HasForeignKey(se => new { se.ExerciseNumber, se.ExerciseLecture });
         }
     }
 }

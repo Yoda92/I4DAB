@@ -7,7 +7,7 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Course> builder)
         {
-            
+            builder.HasKey(c => c.CourseID);
         }
     }
 }

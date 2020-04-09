@@ -3,7 +3,7 @@ using Assignment2.TopLayer.Domain;
 
 namespace Assignment2.TopLayer.RepositoryInterfaces
 {
-    public interface IStudentRepository
+    public interface IStudentRepository : IRepository<Student>
     {
          IEnumerable<Student> GetStudentsNeedingAssistance();
          void AssistanceIsCompleted(uint StudentID);

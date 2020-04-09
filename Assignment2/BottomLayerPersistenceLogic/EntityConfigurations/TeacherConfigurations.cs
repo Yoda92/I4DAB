@@ -9,9 +9,6 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
         public void Configure(EntityTypeBuilder<Teacher> builder)
         {
             builder.HasKey(t => t.AUID);
-
-            
-            
         }
     }
 }
