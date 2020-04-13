@@ -4,6 +4,6 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
 {
     public interface IExerciseRepository : IRepository<Exercise>
     {
-         
+
     }
 }

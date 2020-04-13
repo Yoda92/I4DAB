@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Assignment2.BottomLayerPersistenceLogic.Repositories
 {
-    class HelpRequestRepository: IHelpRequestRepository
+    class HelpRequestRepository : IHelpRequestRepository
     {
         public StudentHelperContext Context { get; set; }
 
@@ -26,9 +26,37 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
             return Context.StudentExercises.Where(s => s.StudentAUID == studentId && s.IsOpen == true).ToList();
         }
 
-        public IEnumerable Test()
+
+
+        public IEnumerable<TeacherHelpRequestExercise> GetTeacherExercises(string teacherId, int courseId)
         {
-            return Context.StudentExercises.ToList();
+            return Context.Exercises.Where(e => (e.TeacherAUID == teacherId && e.CourseID == courseId)).Join(
+                Context.StudentExercises,
+                e => new { e.Lecture, e.Number, e.CourseID },
+                se => new { Lecture = se.ExerciseLecture, Number = se.ExerciseNumber, CourseID = se.CourseId },
+                (e, se) => new
+                {
+                    se.IsOpen,
+                    se.StudentAUID,
+                    e.Course,
+                    e.Lecture,
+                    e.Number,
+                    e.HelpWhere
+                }
+            ).Where(hr => hr.IsOpen).Join(
+                Context.Students,
+                hr => hr.StudentAUID,
+                s => s.AUID,
+                (hr, s) => new TeacherHelpRequestExercise
+                {
+                    StudentAUID = hr.StudentAUID,
+                    Lecture = hr.Lecture,
+                    Number = hr.Number,
+                    HelpWhere = hr.HelpWhere,
+                    Name = s.Name
+                }
+            )
+            .ToList();
         }
     }
 }
