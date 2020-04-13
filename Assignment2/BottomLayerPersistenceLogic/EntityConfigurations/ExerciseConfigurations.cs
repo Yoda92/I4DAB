@@ -7,7 +7,7 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Exercise> builder)
         {
-            builder.HasKey(e => new{ e.Number, e.Lecture });
+            builder.HasKey(e => new { e.Number, e.Lecture, e.CourseID });
         }
     }
 }

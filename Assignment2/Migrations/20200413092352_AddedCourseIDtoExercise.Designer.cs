@@ -3,14 +3,16 @@ using Assignment2.BottomLayerPersistenceLogic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(StudentHelperContext))]
-    partial class StudentHelperContextModelSnapshot : ModelSnapshot
+    [Migration("20200413092352_AddedCourseIDtoExercise")]
+    partial class AddedCourseIDtoExercise
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +111,7 @@ namespace Assignment2.Migrations
                     b.Property<string>("TeacherAUID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Number", "Lecture", "CourseID");
+                    b.HasKey("Number", "Lecture");
 
                     b.HasIndex("CourseID");
 
@@ -337,9 +339,6 @@ namespace Assignment2.Migrations
                     b.Property<int>("ExerciseNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsOpen")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -347,7 +346,7 @@ namespace Assignment2.Migrations
 
                     b.HasKey("StudentAUID", "ExerciseLecture", "ExerciseNumber");
 
-                    b.HasIndex("ExerciseNumber", "ExerciseLecture", "CourseId");
+                    b.HasIndex("ExerciseNumber", "ExerciseLecture");
 
                     b.ToTable("StudentExercises");
 
@@ -357,7 +356,6 @@ namespace Assignment2.Migrations
                             StudentAUID = "au111111",
                             ExerciseLecture = 1,
                             ExerciseNumber = 1,
-                            CourseId = 1,
                             IsOpen = false
                         },
                         new
@@ -365,7 +363,6 @@ namespace Assignment2.Migrations
                             StudentAUID = "au222222",
                             ExerciseLecture = 1,
                             ExerciseNumber = 2,
-                            CourseId = 2,
                             IsOpen = false
                         },
                         new
@@ -373,7 +370,6 @@ namespace Assignment2.Migrations
                             StudentAUID = "au333333",
                             ExerciseLecture = 1,
                             ExerciseNumber = 3,
-                            CourseId = 3,
                             IsOpen = false
                         });
                 });
@@ -506,7 +502,7 @@ namespace Assignment2.Migrations
 
                     b.HasOne("Assignment2.TopLayer.Domain.Exercise", "Exercise")
                         .WithMany("StudentExercises")
-                        .HasForeignKey("ExerciseNumber", "ExerciseLecture", "CourseId")
+                        .HasForeignKey("ExerciseNumber", "ExerciseLecture")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

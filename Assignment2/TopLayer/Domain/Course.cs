@@ -8,6 +8,7 @@ namespace Assignment2.TopLayer.Domain
         public string Name { get; set; }
         public List<Assignment> Assignments { get; set; }
         public List<StudentCourse> StudentsAttending { get; set; }
-        public List<TeacherCourse> TeachersResponsible { get; set; } 
+        public List<TeacherCourse> TeachersResponsible { get; set; }
+        public List<Exercise> Exercises { get; set; }
     }
 }

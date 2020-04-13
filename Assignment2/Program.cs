@@ -20,50 +20,50 @@ namespace Assignment2
                 switch (input)
                 {
                     case "CreateCourse":
-                    {
-                        CreateCourse();
-                        break;
-                    }
+                        {
+                            CreateCourse();
+                            break;
+                        }
                     case "CreateStudent":
-                    {
-                        CreateStudent();
-                        break;
-                    }
+                        {
+                            CreateStudent();
+                            break;
+                        }
                     case "CreateTeacher":
-                    {
-                        CreateTeacher();
-                        break;
-                    }
+                        {
+                            CreateTeacher();
+                            break;
+                        }
                     case "CreateAssignment":
-                    {
-                        CreateAssignment();
-                        break;
-                    }
+                        {
+                            CreateAssignment();
+                            break;
+                        }
                     case "CreateExercise":
-                    {
-                        CreateExercise();
-                        break;
-                    }
+                        {
+                            CreateExercise();
+                            break;
+                        }
                     case "CreateHelpRequest":
-                    {
-                        CreateHelpRequest();
-                        break;
-                    }
+                        {
+                            CreateHelpRequest();
+                            break;
+                        }
                     case "GetHelpRequestsStudent":
-                    {
-                        GetOpenHelpRequestsStudent();
-                        break;
-                    }
+                        {
+                            GetOpenHelpRequestsStudent();
+                            break;
+                        }
                     case "GetHelpRequestsTeacher":
-                    {
-                        GetOpenHelpRequestsTeacher();
-                        break;
-                    }
+                        {
+                            GetOpenHelpRequestsTeacher();
+                            break;
+                        }
                     default:
-                    {
-                        Console.WriteLine("Illegal input! Try again.");
-                        break;
-                    }
+                        {
+                            Console.WriteLine("Illegal input! Try again.");
+                            break;
+                        }
                 }
             }
         }
@@ -131,8 +131,39 @@ namespace Assignment2
 
         static void CreateAssignment()
         {
+            Assignment newAssignment = new Assignment();
+            Console.WriteLine("Below you see the names and IDs of the available courses.");
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (Course course in _unitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine($"Course name: {course.Name}, Course ID: {course.CourseID}");
+                }
+            }
+            Console.WriteLine("Please enter the course ID corresponding to this exercise:");
+            newAssignment.CourseID = int.Parse(Console.ReadLine());
 
+            Console.WriteLine("Please enter the integer ID of the new assignment:");
+            newAssignment.AssignmentID = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Below you see a list of registered teachers:");
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (Teacher t in _UnitOfWork.Teachers.GetAll())
+                {
+                    Console.WriteLine($"Name: {t.Name}, AUID: {t.AUID}");
+                }
+            }
+            Console.WriteLine("Please enter the AUID of the teacher responsible for this assignment:");
+            newAssignment.TeacherAUID = Console.ReadLine();
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.Assignments.Add(newAssignment);
+                _UnitOfWork.Complete();
+            }
         }
+
 
         static void CreateExercise()
         {
@@ -152,6 +183,15 @@ namespace Assignment2
             }
             Console.WriteLine("Please specify the AUID of the teacher who is resposible for this exercise");
             newExercise.TeacherAUID = Console.ReadLine();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (Course c in _UnitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine($"Name: {c.Name}, CourseID: {c.CourseID}");
+                }
+            }
+            Console.WriteLine("Please Specify which course this exercise is associated with");
+            newExercise.CourseID = Int32.Parse(Console.ReadLine());
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 _UnitOfWork.Exercises.Add(newExercise);
