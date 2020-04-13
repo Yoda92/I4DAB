@@ -171,16 +171,18 @@ namespace Assignment2
 
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
-                Console.WriteLine("Current exercise numbers, lectures:");
+                Console.WriteLine("Current exercises (number, lecture, courseID):");
                 foreach (Exercise element in _UnitOfWork.Exercises.GetAll())
                 {
-                    Console.WriteLine(element.Number + ", " + element.Lecture);
+                    Console.WriteLine(element.Number + ", " + element.Lecture + ", " + element.CourseID);
                 }
             }
             Console.WriteLine("Enter exercise number");
             newStudentExercise.ExerciseNumber = int.Parse(System.Console.ReadLine());
             Console.WriteLine("Enter lecture");
             newStudentExercise.ExerciseLecture = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Enter courseID");
+            newStudentExercise.CourseId = int.Parse(System.Console.ReadLine());
 
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
@@ -349,16 +351,18 @@ namespace Assignment2
 
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
-                Console.WriteLine("Current exercise numbers, lectures:");
+                Console.WriteLine("Current exercises (number, lectures, courseID):");
                 foreach (Exercise element in _UnitOfWork.Exercises.GetAll())
                 {
-                    Console.WriteLine(element.Number + ", " + element.Lecture);
+                    Console.WriteLine(element.Number + ", " + element.Lecture + ", " + element.CourseID);
                 }
             }
             Console.WriteLine("Enter exercise number");
             newStudentExercise.ExerciseNumber = int.Parse(System.Console.ReadLine());
             Console.WriteLine("Enter lecture");
             newStudentExercise.ExerciseLecture = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Enter course ID");
+            newStudentExercise.CourseId = int.Parse(System.Console.ReadLine());
 
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
@@ -433,7 +437,7 @@ namespace Assignment2
                 System.Console.WriteLine("Current help requests in exercises:");
                 foreach (StudentExercise element in _UnitOfWork.HelpRequests.GetStudentExercises(studentId))
                 {
-                    System.Console.WriteLine("Exercise lecture,number: " + element.ExerciseLecture + "," + element.ExerciseNumber);
+                    System.Console.WriteLine("Exercise lecture,number,courseID: " + element.ExerciseLecture + "," + element.ExerciseNumber + "," + element.CourseId);
                 }
                 _UnitOfWork.Complete();
             }
