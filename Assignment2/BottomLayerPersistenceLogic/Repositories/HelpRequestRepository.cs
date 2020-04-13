@@ -18,12 +18,12 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
 
         public IEnumerable<StudentAssignment> GetStudentAssignments(string studentId)
         {
-            return Context.StudentAssignments.Where(s => s.StudentAUID == studentId).ToList();
+            return Context.StudentAssignments.Where(s => s.StudentAUID == studentId && s.IsOpen == true).ToList();
         }
 
         public IEnumerable<StudentExercise> GetStudentExercises(string studentId)
         {
-            return Context.StudentExercises.Where(s => s.StudentAUID == studentId).ToList();
+            return Context.StudentExercises.Where(s => s.StudentAUID == studentId && s.IsOpen == true).ToList();
         }
     }
 }
