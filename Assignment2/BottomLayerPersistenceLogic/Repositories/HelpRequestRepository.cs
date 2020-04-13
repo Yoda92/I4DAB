@@ -26,9 +26,13 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
             Context.Set<StudentExercise>().Add(studentExercise);
         }
 
-        public IEnumerable<StudentAssignment> GetStudentAssignments(string studentId)
+        public IEnumerable<Assignment> GetStudentAssignments(string studentId)
         {
-            return Context.StudentAssignments.Where(s => s.StudentAUID == studentId && s.IsOpen == true).ToList();
+            return Context.StudentAssignments.Where(s => s.StudentAUID == studentId && s.IsOpen == true).Join(
+                Context.Assignments,
+                sa => sa.AssignmentID,
+                a => a.AssignmentID,
+                (sa, a) => a).ToList();
         }
 
         public IEnumerable<StudentExercise> GetStudentExercises(string studentId)
@@ -46,7 +50,8 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
                     {
                         sa.IsOpen,
                         sa.StudentAUID,
-                        sa.AssignmentID
+                        sa.AssignmentID,
+                        a.AssignmentName
                     }
                 ).Where(hr => hr.IsOpen).Join(
                     Context.Students,
@@ -56,7 +61,8 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
                     {
                         StudentAUID = hr.StudentAUID,
                         Name = s.Name,
-                        AssignmentId = hr.AssignmentID
+                        AssignmentId = hr.AssignmentID,
+                        AssignmentName = hr.AssignmentName
                     }
                 )
                 .ToList();

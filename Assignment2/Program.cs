@@ -345,9 +345,9 @@ namespace Assignment2
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 System.Console.WriteLine("Current help requests in assignments:");
-                foreach (StudentAssignment element in _UnitOfWork.HelpRequests.GetStudentAssignments(studentId))
+                foreach (var assignment in _UnitOfWork.HelpRequests.GetStudentAssignments(studentId))
                 {
-                    System.Console.WriteLine("Assignment ID: " + element.AssignmentID);
+                    System.Console.WriteLine("Assignment ID: " + assignment.AssignmentID + ", Assignment Name: " + assignment.AssignmentName);
                 }
                 System.Console.WriteLine("Current help requests in exercises:");
                 foreach (StudentExercise element in _UnitOfWork.HelpRequests.GetStudentExercises(studentId))

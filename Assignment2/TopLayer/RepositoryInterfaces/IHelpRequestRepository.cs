@@ -17,12 +17,14 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
         public string StudentAUID { get; set; }
         public string Name { get; set; }
         public int AssignmentId { get; set; }
+        public string AssignmentName { get; set; }
     }
+
     public interface IHelpRequestRepository
     {
         public void AddHelpRequestExercise(StudentExercise studentExercise);
         public void AddHelpRequestAssignment(StudentAssignment studentAssignment);
-        public IEnumerable<StudentAssignment> GetStudentAssignments(string studentId);
+        public IEnumerable<Assignment> GetStudentAssignments(string studentId);
         public IEnumerable<StudentExercise> GetStudentExercises(string studentId);
         public IEnumerable<TeacherHelpRequestExercise> GetTeacherExercises(string teacherId, int courseId);
         public IEnumerable<TeacherHelpRequestAssignment> GetTeacherAssignments(string teacherId, int courseId);
