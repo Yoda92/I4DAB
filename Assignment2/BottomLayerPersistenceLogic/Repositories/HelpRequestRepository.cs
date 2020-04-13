@@ -26,7 +26,31 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
             return Context.StudentExercises.Where(s => s.StudentAUID == studentId && s.IsOpen == true).ToList();
         }
 
-
+        public IEnumerable<TeacherHelpRequestAssignment> GetTeacherAssignments(string teacherId, int courseId)
+        {
+            return Context.Assignments.Where(a => (a.TeacherAUID == teacherId && a.CourseID == courseId)).Join(
+                    Context.StudentAssignments,
+                    a => new { a.AssignmentID },
+                    sa => new { sa.AssignmentID },
+                    (a, sa) => new
+                    {
+                        sa.IsOpen,
+                        sa.StudentAUID,
+                        sa.AssignmentID
+                    }
+                ).Where(hr => hr.IsOpen).Join(
+                    Context.Students,
+                    hr => hr.StudentAUID,
+                    s => s.AUID,
+                    (hr, s) => new TeacherHelpRequestAssignment
+                    {
+                        StudentAUID = hr.StudentAUID,
+                        Name = s.Name,
+                        AssignmentId = hr.AssignmentID
+                    }
+                )
+                .ToList();
+        }
 
         public IEnumerable<TeacherHelpRequestExercise> GetTeacherExercises(string teacherId, int courseId)
         {
