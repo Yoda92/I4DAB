@@ -5,8 +5,6 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
 {
     public interface IAssignmentRepository : IRepository<Assignment>
     {
-        IEnumerable<Assignment> GetAssignmentsWithHelpRequestsByStudent(Student student);
-        IEnumerable<Assignment> GetAssignmentsByCourse(Course course);
 
     }
 }

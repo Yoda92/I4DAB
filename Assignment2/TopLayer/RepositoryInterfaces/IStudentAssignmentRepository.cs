@@ -3,8 +3,7 @@ using Assignment2.TopLayer.Domain;
 
 namespace Assignment2.TopLayer.RepositoryInterfaces
 {
-    public interface ICourseRepository : IRepository<Course>
+    public interface IStudentAssignmentRepository : IRepository<StudentAssignment>
     {
-
     }
 }

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 namespace Assignment2.BottomLayerPersistenceLogic.Repositories
 {
-    public class StudentRepository : Repository<Student>, IStudentRepository
+    public class StudentExerciseRepository : Repository<StudentExercise>, IStudentExerciseRepository
     {
-        public StudentRepository(StudentHelperContext context) : base(context)
+        public StudentExerciseRepository(StudentHelperContext context) : base(context)
         {
+
         }
     }
 }

@@ -76,16 +76,16 @@ namespace Assignment2
                         }
                     case "10":
                     case "CloseHelpRequestAssignment":
-                    {
-                        CloseHelpRequestAssignment();
-                        break;
-                    }
+                        {
+                            CloseHelpRequestAssignment();
+                            break;
+                        }
                     case "11":
                     case "CloseHelpRequestExercise":
-                    {
-                        CloseHelpRequestExercise();
-                        break;
-                    }
+                        {
+                            CloseHelpRequestExercise();
+                            break;
+                        }
                     case "12":
                     case "GetStatistics":
                         {
@@ -140,7 +140,7 @@ namespace Assignment2
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 Console.WriteLine("Current assignment ID's:");
-                foreach (Assignment element in _UnitOfWork.Assignments.GetAll())
+                foreach (StudentAssignment element in _UnitOfWork.StudentAssignments.Find(a => a.StudentAUID == newStudentAssignment.StudentAUID))
                 {
                     Console.WriteLine(element.AssignmentID);
                 }
@@ -172,9 +172,9 @@ namespace Assignment2
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 Console.WriteLine("Current exercises (number, lecture, courseID):");
-                foreach (Exercise element in _UnitOfWork.Exercises.GetAll())
+                foreach (StudentExercise element in _UnitOfWork.StudentExercises.Find(se => se.StudentAUID == newStudentExercise.StudentAUID))
                 {
-                    Console.WriteLine(element.Number + ", " + element.Lecture + ", " + element.CourseID);
+                    Console.WriteLine(element.ExerciseNumber + ", " + element.ExerciseLecture + ", " + element.CourseId);
                 }
             }
             Console.WriteLine("Enter exercise number");

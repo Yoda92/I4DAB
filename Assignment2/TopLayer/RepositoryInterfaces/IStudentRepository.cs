@@ -5,7 +5,5 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
 {
     public interface IStudentRepository : IRepository<Student>
     {
-         IEnumerable<Student> GetStudentsNeedingAssistance();
-         void AssistanceIsCompleted(uint StudentID);
     }
 }

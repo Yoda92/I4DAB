@@ -12,6 +12,8 @@ namespace Assignment2.TopLayer
         IStudentRepository Students { get; }
         ITeacherRepository Teachers { get; }
         IHelpRequestRepository HelpRequests { get; }
+        IStudentAssignmentRepository StudentAssignments { get; }
+        IStudentExerciseRepository StudentExercises { get; }
         int Complete();
     }
 }
