@@ -98,7 +98,16 @@ namespace Assignment2
 
         static void CreateTeacher()
         {
-
+            Teacher newTeacher = new Teacher();
+            Console.WriteLine("Please enter the name of the new teacher:");
+            newTeacher.Name = Console.ReadLine();
+            Console.WriteLine("Please enter the AUID of the new teacher:");
+            newTeacher.AUID = Console.ReadLine();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.Teachers.Add(newTeacher);
+                _UnitOfWork.Complete();
+            }
         }
 
         static void CreateAssignment()
