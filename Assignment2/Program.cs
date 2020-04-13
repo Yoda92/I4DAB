@@ -228,11 +228,21 @@ namespace Assignment2
             Console.WriteLine("Enter course ID");
             string courseId = System.Console.ReadLine();
 
+            Console.WriteLine("Open exercise help requests:");
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 foreach (var h in _UnitOfWork.HelpRequests.GetTeacherExercises(teacherId, Int32.Parse(courseId)))
                 {
                     Console.WriteLine($"StudentName: {h.Name}, StudentAUID: {h.StudentAUID}, Exercise {h.Lecture}-{h.Number}, HelpWhere: {h.HelpWhere}");
+                }
+            }
+
+            Console.WriteLine("Open assignment help requests:");
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (var h in _UnitOfWork.HelpRequests.GetTeacherAssignments(teacherId, Int32.Parse(courseId)))
+                {
+                    Console.WriteLine($"StudentName: {h.Name}, StudentAUID: {h.StudentAUID}, AssignmentID: {h.AssignmentId}");
                 }
             }
         }
