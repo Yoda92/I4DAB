@@ -4,6 +4,7 @@ using System.Linq;
 using Assignment2.BottomLayerPersistenceLogic;
 using Assignment2.BottomLayerPersistenceLogic.Repositories;
 using Assignment2.TopLayer.Domain;
+using Assignment2.TopLayer.RepositoryInterfaces;
 
 namespace Assignment2
 {
@@ -425,9 +426,9 @@ namespace Assignment2
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 System.Console.WriteLine("Current help requests in assignments:");
-                foreach (StudentAssignment element in _UnitOfWork.HelpRequests.GetStudentAssignments(studentId))
+                foreach (var assignment in _UnitOfWork.HelpRequests.GetStudentAssignments(studentId))
                 {
-                    System.Console.WriteLine("Assignment ID: " + element.AssignmentID);
+                    System.Console.WriteLine("Assignment ID: " + assignment.AssignmentID + ", Assignment Name: " + assignment.AssignmentName);
                 }
                 System.Console.WriteLine("Current help requests in exercises:");
                 foreach (StudentExercise element in _UnitOfWork.HelpRequests.GetStudentExercises(studentId))
@@ -440,7 +441,38 @@ namespace Assignment2
 
         static void GetStatistics()
         {
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available course ID's:");
+                foreach (Course course in _UnitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine($"CourseName: {course.Name}, CourseId: {course.CourseID}");
+                }
+            }
+            Console.WriteLine("Enter course ID");
+            int courseId = Int32.Parse(System.Console.ReadLine());
 
+            int exTotal, exOpen, exClosed, asTotal, asOpen, asClosed;
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                (exTotal, exOpen, exClosed) = _UnitOfWork.HelpRequests.GetExerciseHelpRequestsFromCourse(courseId)
+                    .Aggregate((0, 0, 0), sumStatuses);
+                (asTotal, asOpen, asClosed) = _UnitOfWork.HelpRequests.GetAssignmentHelpRequestsFromCourse(courseId)
+                    .Aggregate((0, 0, 0), sumStatuses);
+            }
+            Console.WriteLine("Statistics for exercises");
+            Console.WriteLine($"Total: {exTotal}, Open: {exOpen}, Closed: {exClosed}");
+            Console.WriteLine("Statistics for assignments");
+            Console.WriteLine($"Total: {asTotal}, Open: {asOpen}, Closed: {asClosed}");
+        }
+
+        private static (int, int, int) sumStatuses((int, int, int) statuses, HelpRequestStatus hr)
+        {
+            var (total, open, closed) = statuses;
+            total++;
+            if (hr.IsOpen) open++;
+            else closed++;
+            return (total, open, closed);
         }
     }
 }
