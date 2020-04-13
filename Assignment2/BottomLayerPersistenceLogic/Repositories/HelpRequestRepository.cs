@@ -4,6 +4,7 @@ using Assignment2.TopLayer.RepositoryInterfaces;
 using Assignment2.TopLayer.Domain;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Assignment2.BottomLayerPersistenceLogic.Repositories
 {
@@ -14,6 +15,25 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
         public HelpRequestRepository(StudentHelperContext context)
         {
             Context = context;
+        }
+
+        public void CloseHelpRequestAssignment(StudentAssignment studentAssignment)
+        {
+            var entity = Context.StudentAssignments.First(item =>
+                item.StudentAUID == studentAssignment.StudentAUID &&
+                item.AssignmentID == studentAssignment.AssignmentID);
+            entity.IsOpen = false;
+            Context.StudentAssignments.Update(entity);
+        }
+
+        public void CloseHelpRequestExercise(StudentExercise studentExercise)
+        {
+            var entity = Context.StudentExercises.First(item =>
+                item.StudentAUID == studentExercise.StudentAUID &&
+                item.ExerciseLecture == studentExercise.ExerciseLecture &&
+                item.ExerciseNumber == studentExercise.ExerciseNumber);
+            entity.IsOpen = false;
+            Context.StudentExercises.Update(entity);
         }
 
         public void AddHelpRequestAssignment(StudentAssignment studentAssignment)
