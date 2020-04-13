@@ -4,6 +4,7 @@ using System.Linq;
 using Assignment2.BottomLayerPersistenceLogic;
 using Assignment2.BottomLayerPersistenceLogic.Repositories;
 using Assignment2.TopLayer.Domain;
+using Assignment2.TopLayer.RepositoryInterfaces;
 
 namespace Assignment2
 {
@@ -374,29 +375,24 @@ namespace Assignment2
             int exTotal, exOpen, exClosed, asTotal, asOpen, asClosed;
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
-                (exTotal, exOpen, exClosed) = _UnitOfWork.HelpRequests.GetExerciseHelpRequestsFromCourse(courseId).Aggregate((0, 0, 0), (statuses, hr) =>
-                {
-                    var (total, open, closed) = statuses;
-                    total++;
-                    if (hr.IsOpen) open++;
-                    else closed++;
-                    return (total, open, closed);
-                });
-
-                (asTotal, asOpen, asClosed) = _UnitOfWork.HelpRequests.GetAssignmentHelpRequestsFromCourse(courseId).Aggregate((0, 0, 0), (statuses, hr) =>
-                {
-                    var (total, open, closed) = statuses;
-                    total++;
-                    if (hr.IsOpen) open++;
-                    else closed++;
-                    return (total, open, closed);
-                });
-
+                (exTotal, exOpen, exClosed) = _UnitOfWork.HelpRequests.GetExerciseHelpRequestsFromCourse(courseId)
+                    .Aggregate((0, 0, 0), sumStatuses);
+                (asTotal, asOpen, asClosed) = _UnitOfWork.HelpRequests.GetAssignmentHelpRequestsFromCourse(courseId)
+                    .Aggregate((0, 0, 0), sumStatuses);
             }
             Console.WriteLine("Statistics for exercises");
             Console.WriteLine($"Total: {exTotal}, Open: {exOpen}, Closed: {exClosed}");
             Console.WriteLine("Statistics for assignments");
             Console.WriteLine($"Total: {asTotal}, Open: {asOpen}, Closed: {asClosed}");
+        }
+
+        private static (int, int, int) sumStatuses((int, int, int) statuses, HelpRequestStatus hr)
+        {
+            var (total, open, closed) = statuses;
+            total++;
+            if (hr.IsOpen) open++;
+            else closed++;
+            return (total, open, closed);
         }
     }
 }
