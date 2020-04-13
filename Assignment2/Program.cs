@@ -61,10 +61,10 @@ namespace Assignment2
             Console.WriteLine("|| CreateTeacher             || Creates a new teacher.                             ||");
             Console.WriteLine("|| CreateAssignment          || Creates a new assignment.                          ||");
             Console.WriteLine("|| CreateExercise            || Creates a new exercise.                            ||");
-            // Console.WriteLine("Create Review"); ????
             Console.WriteLine("|| CreateHelpRequest         || Creates a new help request.                        ||");
             Console.WriteLine("|| GetHelpRequestsStudent    || Shows all open help request given a student.       ||");
             Console.WriteLine("|| GetHelpRequestsTeacher    || Shows all open help request given a teacher.       ||");
+            Console.WriteLine("|| GetStatistics             || Shows statistics for all help requests             ||");
             Console.WriteLine("-------------------------------------------------------------------------------------");
         }
 
@@ -94,6 +94,21 @@ namespace Assignment2
                 _UnitOfWork.Complete();
             }
             Console.WriteLine("Student created.");
+        }
+
+        static void CreateTeacher()
+        {
+
+        }
+
+        static void CreateAssignment()
+        {
+
+        }
+
+        static void CreateExercise()
+        {
+
         }
 
         static void CreateHelpRequest()
