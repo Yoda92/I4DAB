@@ -146,10 +146,32 @@ namespace Assignment2
 
         static void GetOpenHelpRequestsTeacher()
         {
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available teacher ID's:");
+                foreach (Teacher element in _UnitOfWork.Teachers.GetAll())
+                {
+                    Console.WriteLine(element.AUID);
+                }
+            }
             Console.WriteLine("Enter teachers AUID");
             string teacherId = System.Console.ReadLine();
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available course ID's:");
+                foreach (Course element in _UnitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine(element.CourseID);
+                }
+            }
             Console.WriteLine("Enter course ID");
             string courseId = System.Console.ReadLine();
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                // Get open help requests
+            }
         }
 
         static void GetOpenHelpRequestsStudent()
