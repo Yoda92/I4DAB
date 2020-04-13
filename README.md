@@ -4,7 +4,7 @@ Members
 
 * Anders Fisker: au476572
 * Christoffer Nørbjerg: au455948
-* David Bendix:
+* David Bendix: au295875
 * Kristian Lau Jespersen: au611579
 
 ## Setup before running
