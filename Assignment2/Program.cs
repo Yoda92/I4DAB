@@ -176,8 +176,17 @@ namespace Assignment2
 
         static void GetOpenHelpRequestsStudent()
         {
-            Console.WriteLine("Enter a students AUID");
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available student ID's:");
+                foreach (Student element in _UnitOfWork.Students.GetAll())
+                {
+                    Console.WriteLine(element.AUID);
+                }
+            }
+            Console.WriteLine("Enter students AUID");
             string studentId = System.Console.ReadLine();
+
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 System.Console.WriteLine("Current help requests in assignments:");
