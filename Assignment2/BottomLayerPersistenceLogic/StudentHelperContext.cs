@@ -46,6 +46,8 @@ namespace Assignment2.BottomLayerPersistenceLogic
             // Teachers
             modelBuilder.Entity<Teacher>().HasData(new Teacher
             { AUID = "au555555", Name = "Arnold Ananas" });
+            modelBuilder.Entity<Teacher>().HasData(new Teacher 
+                { AUID = "au123456", Name = "Hubert Gungadiño" });
             modelBuilder.Entity<Teacher>().HasData(new Teacher
             { AUID = "au666666", Name = "Bob Bodega" });
             modelBuilder.Entity<Teacher>().HasData(new Teacher
@@ -71,11 +73,11 @@ namespace Assignment2.BottomLayerPersistenceLogic
 
             // Assignments
             modelBuilder.Entity<Assignment>().HasData(new Assignment
-            { AssignmentID = 1, CourseID = 1, TeacherAUID = "au555555" });
+            { AssignmentID = 1, AssignmentName = "DAB assignment 2 (extreme difficulty)", CourseID = 1, TeacherAUID = "au555555" });
             modelBuilder.Entity<Assignment>().HasData(new Assignment
-            { AssignmentID = 2, CourseID = 2, TeacherAUID = "au666666" });
+            { AssignmentID = 2, AssignmentName = "Hjemmeside der appellerer til unge mennesker", CourseID = 2, TeacherAUID = "au666666" });
             modelBuilder.Entity<Assignment>().HasData(new Assignment
-            { AssignmentID = 3, CourseID = 3, TeacherAUID = "au777777" });
+            { AssignmentID = 3, AssignmentName = "Become DK Elon Musk", CourseID = 3, TeacherAUID = "au777777" });
 
             // TeacherCourses
             modelBuilder.Entity<TeacherCourse>().HasData(new TeacherCourse

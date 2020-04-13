@@ -143,8 +143,8 @@ namespace Assignment2
             Console.WriteLine("Please enter the course ID corresponding to this exercise:");
             newAssignment.CourseID = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Please enter the integer ID of the new assignment:");
-            newAssignment.AssignmentID = int.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the name of the new assignment:");
+            newAssignment.AssignmentName = Console.ReadLine();
 
             Console.WriteLine("Below you see a list of registered teachers:");
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
