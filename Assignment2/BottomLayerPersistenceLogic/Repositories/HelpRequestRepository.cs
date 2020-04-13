@@ -16,6 +16,16 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
             Context = context;
         }
 
+        public void AddHelpRequestAssignment(StudentAssignment studentAssignment)
+        {
+            Context.Set<StudentAssignment>().Add(studentAssignment);
+        }
+
+        public void AddHelpRequestExercise(StudentExercise studentExercise)
+        {
+            Context.Set<StudentExercise>().Add(studentExercise);
+        }
+
         public IEnumerable<StudentAssignment> GetStudentAssignments(string studentId)
         {
             return Context.StudentAssignments.Where(s => s.StudentAUID == studentId && s.IsOpen == true).ToList();

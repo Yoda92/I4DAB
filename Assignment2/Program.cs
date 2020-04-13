@@ -44,11 +44,16 @@ namespace Assignment2
                             CreateExercise();
                             break;
                         }
-                    case "CreateHelpRequest":
+                    case "CreateHelpRequestAssignment":
                         {
-                            CreateHelpRequest();
+                            CreateHelpRequestAssignment();
                             break;
                         }
+                    case "CreateHelpRequestExercise":
+                    {
+                        CreateHelpRequestExercise();
+                        break;
+                    }
                     case "GetHelpRequestsStudent":
                         {
                             GetOpenHelpRequestsStudent();
@@ -71,19 +76,20 @@ namespace Assignment2
         static void InitMessage()
         {
             Console.WriteLine("-------------------------------------------------------------------------------------");
-            Console.WriteLine("||                       HELP REQUEST DATABASE PROGRAM 3000                        ||");
+            Console.WriteLine("||                       HELP REQUEST DATABASE PROGRAM 3000                         ||");
             Console.WriteLine("-------------------------------------------------------------------------------------");
-            Console.WriteLine("|| List of commands          || Description                                        ||");
+            Console.WriteLine("|| List of commands           || Description                                        ||");
             Console.WriteLine("-------------------------------------------------------------------------------------");
-            Console.WriteLine("|| CreateCourse              || Creates a new course.                              ||");
-            Console.WriteLine("|| CreateStudent             || Creates a new student                              ||");
-            Console.WriteLine("|| CreateTeacher             || Creates a new teacher.                             ||");
-            Console.WriteLine("|| CreateAssignment          || Creates a new assignment.                          ||");
-            Console.WriteLine("|| CreateExercise            || Creates a new exercise.                            ||");
-            Console.WriteLine("|| CreateHelpRequest         || Creates a new help request.                        ||");
-            Console.WriteLine("|| GetHelpRequestsStudent    || Shows all open help request given a student.       ||");
-            Console.WriteLine("|| GetHelpRequestsTeacher    || Shows all open help request given a teacher.       ||");
-            Console.WriteLine("|| GetStatistics             || Shows statistics for all help requests             ||");
+            Console.WriteLine("|| CreateCourse               || Creates a new course.                              ||");
+            Console.WriteLine("|| CreateStudent              || Creates a new student                              ||");
+            Console.WriteLine("|| CreateTeacher              || Creates a new teacher.                             ||");
+            Console.WriteLine("|| CreateAssignment           || Creates a new assignment.                          ||");
+            Console.WriteLine("|| CreateExercise             || Creates a new exercise.                            ||");
+            Console.WriteLine("|| CreateHelpRequestAssignment|| Creates a new assignment help request.             ||");
+            Console.WriteLine("|| CreateHelpRequestExercise  || Creates a new exercise help request.               ||");
+            Console.WriteLine("|| GetHelpRequestsStudent     || Shows all open help request given a student.       ||");
+            Console.WriteLine("|| GetHelpRequestsTeacher     || Shows all open help request given a teacher.       ||");
+            Console.WriteLine("|| GetStatistics              || Shows statistics for all help requests             ||");
             Console.WriteLine("-------------------------------------------------------------------------------------");
         }
 
@@ -199,9 +205,70 @@ namespace Assignment2
             }
         }
 
-        static void CreateHelpRequest()
+        static void CreateHelpRequestAssignment()
         {
+            StudentAssignment newStudentAssignment = new StudentAssignment();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available student ID's:");
+                foreach (Student element in _UnitOfWork.Students.GetAll())
+                {
+                    Console.WriteLine(element.AUID);
+                }
+            }
+            Console.WriteLine("Enter students AUID");
+            newStudentAssignment.StudentAUID = System.Console.ReadLine();
 
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current assignment ID's:");
+                foreach (Assignment element in _UnitOfWork.Assignments.GetAll())
+                {
+                    Console.WriteLine(element.AssignmentID);
+                }
+            }
+            Console.WriteLine("Enter assignment ID");
+            newStudentAssignment.AssignmentID = int.Parse(System.Console.ReadLine());
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.HelpRequests.AddHelpRequestAssignment(newStudentAssignment);
+                _UnitOfWork.Complete();
+            }
+        }
+
+        static void CreateHelpRequestExercise()
+        {
+            StudentExercise newStudentExercise = new StudentExercise();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available student ID's:");
+                foreach (Student element in _UnitOfWork.Students.GetAll())
+                {
+                    Console.WriteLine(element.AUID);
+                }
+            }
+            Console.WriteLine("Enter students AUID");
+            newStudentExercise.StudentAUID = System.Console.ReadLine();
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current exercise numbers, lectures:");
+                foreach (Exercise element in _UnitOfWork.Exercises.GetAll())
+                {
+                    Console.WriteLine(element.Number + ", " + element.Lecture);
+                }
+            }
+            Console.WriteLine("Enter exercise number");
+            newStudentExercise.ExerciseNumber = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Enter lecture");
+            newStudentExercise.ExerciseLecture = int.Parse(System.Console.ReadLine());
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.HelpRequests.AddHelpRequestExercise(newStudentExercise);
+                _UnitOfWork.Complete();
+            }
         }
 
         static void GetOpenHelpRequestsTeacher()

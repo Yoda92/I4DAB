@@ -20,6 +20,8 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
     }
     public interface IHelpRequestRepository
     {
+        public void AddHelpRequestExercise(StudentExercise studentExercise);
+        public void AddHelpRequestAssignment(StudentAssignment studentAssignment);
         public IEnumerable<StudentAssignment> GetStudentAssignments(string studentId);
         public IEnumerable<StudentExercise> GetStudentExercises(string studentId);
         public IEnumerable<TeacherHelpRequestExercise> GetTeacherExercises(string teacherId, int courseId);
