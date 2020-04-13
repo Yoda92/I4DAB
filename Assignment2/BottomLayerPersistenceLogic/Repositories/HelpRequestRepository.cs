@@ -25,5 +25,10 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
         {
             return Context.StudentExercises.Where(s => s.StudentAUID == studentId && s.IsOpen == true).ToList();
         }
+
+        public IEnumerable Test()
+        {
+            return Context.StudentExercises.ToList();
+        }
     }
 }

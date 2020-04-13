@@ -8,5 +8,6 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
     {
         public IEnumerable<StudentAssignment> GetStudentAssignments(string studentId);
         public IEnumerable<StudentExercise> GetStudentExercises(string studentId);
+        public IEnumerable Test();
     }
 }
