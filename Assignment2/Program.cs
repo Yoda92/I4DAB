@@ -11,20 +11,42 @@ namespace Assignment2
     {
         static void Main(string[] args)
         {
-            InitMessage();
             string input;
             while (true)
             {
+                InitMessage();
                 Console.WriteLine("Please enter a command:");
                 input = Console.ReadLine();
                 switch (input)
                 {
                     case "CreateCourse":
-                    {
-                        CreateCourse();
-                        break;
-                    }
+                        {
+                            CreateCourse();
+                            break;
+                        }
                     case "CreateStudent":
+<<<<<<< HEAD
+                        {
+                            CreateStudent();
+                            break;
+                        }
+                    case "GetHelpRequestsStudent":
+                        {
+                            Console.WriteLine("Enter a students AUID");
+                            GetOpenHelpRequests(System.Console.ReadLine());
+                            break;
+                        }
+                    case "GetHelpRequestsTeacher":
+                        {
+                            Console.WriteLine("Enter teachers AUID");
+                            break;
+                        }
+                    case "CreateExercise":
+                        {
+                            CreateExercise();
+                            break;
+                        }
+=======
                     {
                         CreateStudent();
                         break;
@@ -59,11 +81,12 @@ namespace Assignment2
                         GetOpenHelpRequestsTeacher();
                         break;
                     }
+>>>>>>> 6ac6d3b350e989ef55585ced31656d21dafd381d
                     default:
-                    {
-                        Console.WriteLine("Illegal input! Try again.");
-                        break;
-                    }
+                        {
+                            Console.WriteLine("Illegal input! Try again.");
+                            break;
+                        }
                 }
             }
         }
@@ -136,7 +159,27 @@ namespace Assignment2
 
         static void CreateExercise()
         {
-
+            Exercise newExercise = new Exercise();
+            Console.WriteLine("Please enter lecture number. This is half of a primary key");
+            newExercise.Lecture = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter exercise number. This is the other half of the primary key");
+            newExercise.Number = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Please specify where help can be found");
+            newExercise.HelpWhere = Console.ReadLine();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (Teacher t in _UnitOfWork.Teachers.GetAll())
+                {
+                    Console.WriteLine($"Name: {t.Name}, AUID: {t.AUID}");
+                }
+            }
+            Console.WriteLine("Please specify the AUID of the teacher who is resposible for this exercise");
+            newExercise.TeacherAUID = Console.ReadLine();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.Exercises.Add(newExercise);
+                _UnitOfWork.Complete();
+            }
         }
 
         static void CreateHelpRequest()
