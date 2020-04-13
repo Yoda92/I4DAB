@@ -25,20 +25,18 @@ namespace Assignment2
                             break;
                         }
                     case "CreateStudent":
-<<<<<<< HEAD
                         {
                             CreateStudent();
                             break;
                         }
-                    case "GetHelpRequestsStudent":
+                    case "CreateTeacher":
                         {
-                            Console.WriteLine("Enter a students AUID");
-                            GetOpenHelpRequests(System.Console.ReadLine());
+                            CreateTeacher();
                             break;
                         }
-                    case "GetHelpRequestsTeacher":
+                    case "CreateAssignment":
                         {
-                            Console.WriteLine("Enter teachers AUID");
+                            CreateAssignment();
                             break;
                         }
                     case "CreateExercise":
@@ -46,42 +44,21 @@ namespace Assignment2
                             CreateExercise();
                             break;
                         }
-=======
-                    {
-                        CreateStudent();
-                        break;
-                    }
-                    case "CreateTeacher":
-                    {
-                        CreateTeacher();
-                        break;
-                    }
-                    case "CreateAssignment":
-                    {
-                        CreateAssignment();
-                        break;
-                    }
-                    case "CreateExercise":
-                    {
-                        CreateExercise();
-                        break;
-                    }
                     case "CreateHelpRequest":
-                    {
-                        CreateHelpRequest();
-                        break;
-                    }
+                        {
+                            CreateHelpRequest();
+                            break;
+                        }
                     case "GetHelpRequestsStudent":
-                    {
-                        GetOpenHelpRequestsStudent();
-                        break;
-                    }
+                        {
+                            GetOpenHelpRequestsStudent();
+                            break;
+                        }
                     case "GetHelpRequestsTeacher":
-                    {
-                        GetOpenHelpRequestsTeacher();
-                        break;
-                    }
->>>>>>> 6ac6d3b350e989ef55585ced31656d21dafd381d
+                        {
+                            GetOpenHelpRequestsTeacher();
+                            break;
+                        }
                     default:
                         {
                             Console.WriteLine("Illegal input! Try again.");
@@ -175,6 +152,15 @@ namespace Assignment2
             }
             Console.WriteLine("Please specify the AUID of the teacher who is resposible for this exercise");
             newExercise.TeacherAUID = Console.ReadLine();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (Course c in _UnitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine($"Name: {c.Name}, CourseID: {c.CourseID}");
+                }
+            }
+            Console.WriteLine("Please Specify which course this exercise is associated with");
+            newExercise.CourseID = Int32.Parse(Console.ReadLine());
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 _UnitOfWork.Exercises.Add(newExercise);

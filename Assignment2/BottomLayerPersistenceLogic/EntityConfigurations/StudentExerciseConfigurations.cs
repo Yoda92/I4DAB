@@ -9,13 +9,13 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
         {
             builder.Property(p => p.IsOpen)
                 .HasDefaultValue(true);
-            builder.HasKey(se => new {se.StudentAUID, se.ExerciseLecture, se.ExerciseNumber});
+            builder.HasKey(se => new { se.StudentAUID, se.ExerciseLecture, se.ExerciseNumber });
             builder.HasOne(se => se.Student)
                 .WithMany(s => s.StudentExercises)
                 .HasForeignKey(se => se.StudentAUID);
             builder.HasOne(se => se.Exercise)
                 .WithMany(e => e.StudentExercises)
-                .HasForeignKey(se => new { se.ExerciseNumber, se.ExerciseLecture });
+                .HasForeignKey(se => new { se.ExerciseNumber, se.ExerciseLecture, se.CourseId });
         }
     }
 }
