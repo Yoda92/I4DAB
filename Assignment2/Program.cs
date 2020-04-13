@@ -20,33 +20,11 @@ namespace Assignment2
                 switch (input)
                 {
                     case "CreateCourse":
-                        {
-                            CreateCourse();
-                            break;
-                        }
+                    {
+                        CreateCourse();
+                        break;
+                    }
                     case "CreateStudent":
-<<<<<<< HEAD
-                        {
-                            CreateStudent();
-                            break;
-                        }
-                    case "GetHelpRequestsStudent":
-                        {
-                            Console.WriteLine("Enter a students AUID");
-                            GetOpenHelpRequests(System.Console.ReadLine());
-                            break;
-                        }
-                    case "GetHelpRequestsTeacher":
-                        {
-                            Console.WriteLine("Enter teachers AUID");
-                            break;
-                        }
-                    case "CreateExercise":
-                        {
-                            CreateExercise();
-                            break;
-                        }
-=======
                     {
                         CreateStudent();
                         break;
@@ -81,12 +59,11 @@ namespace Assignment2
                         GetOpenHelpRequestsTeacher();
                         break;
                     }
->>>>>>> 6ac6d3b350e989ef55585ced31656d21dafd381d
                     default:
-                        {
-                            Console.WriteLine("Illegal input! Try again.");
-                            break;
-                        }
+                    {
+                        Console.WriteLine("Illegal input! Try again.");
+                        break;
+                    }
                 }
             }
         }
