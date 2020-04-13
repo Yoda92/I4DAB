@@ -131,8 +131,38 @@ namespace Assignment2
 
         static void CreateAssignment()
         {
-
+            Assignment newAssignment = new Assignment();
+            Console.WriteLine("Below you see the names and IDs of the available courses.");
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (Course course in _unitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine($"Course name: {course.Name}, Course ID: {course.CourseID}");
+                }
+            }
+            Console.WriteLine("Please enter the course ID corresponding to this exercise:");
+            newAssignment.CourseID = int.Parse(Console.ReadLine());
+    
+            Console.WriteLine("Please enter the integer ID of the new assignment:");
+            newAssignment.AssignmentID = int.Parse(Console.ReadLine());
+    
+            Console.WriteLine("Below you see a list of registered teachers:");
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                foreach (Teacher t in _UnitOfWork.Teachers.GetAll())
+                {
+                    Console.WriteLine($"Name: {t.Name}, AUID: {t.AUID}");
+                }
+            }Console.WriteLine("Please enter the AUID of the teacher responsible for this assignment:");
+            newAssignment.TeacherAUID = Console.ReadLine();
+    
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.Assignments.Add(newAssignment);
+                _UnitOfWork.Complete();
+            }
         }
+
 
         static void CreateExercise()
         {
