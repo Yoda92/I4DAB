@@ -64,7 +64,7 @@ namespace Assignment2
             // Console.WriteLine("Create Review"); ????
             Console.WriteLine("|| CreateHelpRequest         || Creates a new help request.                        ||");
             Console.WriteLine("|| GetHelpRequestsStudent    || Shows all open help request given a student.       ||");
-            Console.WriteLine("|| GetHelpRequestsTeacher    || Creates a new course.                              ||");
+            Console.WriteLine("|| GetHelpRequestsTeacher    || Shows all open help request given a teacher.       ||");
             Console.WriteLine("-------------------------------------------------------------------------------------");
         }
 
@@ -76,6 +76,7 @@ namespace Assignment2
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 _UnitOfWork.Courses.Add(newCourse);
+                _UnitOfWork.Complete();
             }
             Console.WriteLine("Course created.");
         }
@@ -90,8 +91,14 @@ namespace Assignment2
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 _UnitOfWork.Students.Add(newStudent);
+                _UnitOfWork.Complete();
             }
             Console.WriteLine("Student created.");
+        }
+
+        static void CreateHelpRequest()
+        {
+
         }
 
         static void GetOpenHelpRequests(string teacherId, string courseId)
@@ -113,6 +120,7 @@ namespace Assignment2
                 {
                     System.Console.WriteLine("Exercise lecture,number: " + element.ExerciseLecture + "," + element.ExerciseNumber);
                 }
+                _UnitOfWork.Complete();
             }
         }
 
