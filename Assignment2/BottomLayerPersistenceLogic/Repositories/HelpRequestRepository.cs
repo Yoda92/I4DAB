@@ -98,5 +98,40 @@ namespace Assignment2.BottomLayerPersistenceLogic.Repositories
             )
             .ToList();
         }
+
+        public IEnumerable<HelpRequestStatus> GetAssignmentHelpRequestsFromCourse(int courseId)
+        {
+            return Context.Courses.Where(c => c.CourseID == courseId).Join(
+                Context.Assignments,
+                c => c.CourseID,
+                a => a.CourseID,
+                (c, a) => new { a.AssignmentID }
+            ).Join(
+                Context.StudentAssignments,
+                a => a.AssignmentID,
+                sa => sa.AssignmentID,
+                (a, sa) => new HelpRequestStatus()
+                {
+                    IsOpen = sa.IsOpen
+                }
+            ).ToList();
+        }
+        public IEnumerable<HelpRequestStatus> GetExerciseHelpRequestsFromCourse(int courseId)
+        {
+            return Context.Courses.Where(c => c.CourseID == courseId).Join(
+                Context.Exercises,
+                c => c.CourseID,
+                e => e.CourseID,
+                (c, e) => e
+            ).Join(
+                Context.StudentExercises,
+                e => new { e.Number, e.Lecture, e.CourseID },
+                se => new { Number = se.ExerciseNumber, Lecture = se.ExerciseLecture, CourseID = se.CourseId },
+                (e, sa) => new HelpRequestStatus()
+                {
+                    IsOpen = sa.IsOpen
+                }
+            ).ToList();
+        }
     }
 }

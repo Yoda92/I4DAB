@@ -360,7 +360,43 @@ namespace Assignment2
 
         static void GetStatistics()
         {
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available course ID's:");
+                foreach (Course course in _UnitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine($"CourseName: {course.Name}, CourseId: {course.CourseID}");
+                }
+            }
+            Console.WriteLine("Enter course ID");
+            int courseId = Int32.Parse(System.Console.ReadLine());
 
+            int exTotal, exOpen, exClosed, asTotal, asOpen, asClosed;
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                (exTotal, exOpen, exClosed) = _UnitOfWork.HelpRequests.GetExerciseHelpRequestsFromCourse(courseId).Aggregate((0, 0, 0), (statuses, hr) =>
+                {
+                    var (total, open, closed) = statuses;
+                    total++;
+                    if (hr.IsOpen) open++;
+                    else closed++;
+                    return (total, open, closed);
+                });
+
+                (asTotal, asOpen, asClosed) = _UnitOfWork.HelpRequests.GetAssignmentHelpRequestsFromCourse(courseId).Aggregate((0, 0, 0), (statuses, hr) =>
+                {
+                    var (total, open, closed) = statuses;
+                    total++;
+                    if (hr.IsOpen) open++;
+                    else closed++;
+                    return (total, open, closed);
+                });
+
+            }
+            Console.WriteLine("Statistics for exercises");
+            Console.WriteLine($"Total: {exTotal}, Open: {exOpen}, Closed: {exClosed}");
+            Console.WriteLine("Statistics for assignments");
+            Console.WriteLine($"Total: {asTotal}, Open: {asOpen}, Closed: {asClosed}");
         }
     }
 }

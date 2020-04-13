@@ -20,6 +20,11 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
         public string AssignmentName { get; set; }
     }
 
+    public class HelpRequestStatus
+    {
+        public bool IsOpen { get; set; }
+    }
+
     public interface IHelpRequestRepository
     {
         public void AddHelpRequestExercise(StudentExercise studentExercise);
@@ -28,5 +33,7 @@ namespace Assignment2.TopLayer.RepositoryInterfaces
         public IEnumerable<StudentExercise> GetStudentExercises(string studentId);
         public IEnumerable<TeacherHelpRequestExercise> GetTeacherExercises(string teacherId, int courseId);
         public IEnumerable<TeacherHelpRequestAssignment> GetTeacherAssignments(string teacherId, int courseId);
+        public IEnumerable<HelpRequestStatus> GetAssignmentHelpRequestsFromCourse(int courseId);
+        public IEnumerable<HelpRequestStatus> GetExerciseHelpRequestsFromCourse(int courseId);
     }
 }
