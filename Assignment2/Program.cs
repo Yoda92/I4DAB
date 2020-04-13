@@ -75,6 +75,18 @@ namespace Assignment2
                             break;
                         }
                     case "10":
+                    case "CloseHelpRequestAssignment":
+                    {
+                        CloseHelpRequestAssignment();
+                        break;
+                    }
+                    case "11":
+                    case "CloseHelpRequestExercise":
+                    {
+                        CloseHelpRequestExercise();
+                        break;
+                    }
+                    case "12":
                     case "GetStatistics":
                         {
                             GetStatistics();
@@ -105,8 +117,76 @@ namespace Assignment2
             Console.WriteLine("|| 7  ||CreateHelpRequestExercise  || Creates a new exercise help request.               ||");
             Console.WriteLine("|| 8  ||GetHelpRequestsStudent     || Shows all open help request given a student.       ||");
             Console.WriteLine("|| 9  ||GetHelpRequestsTeacher     || Shows all open help request given a teacher.       ||");
-            Console.WriteLine("|| 10 ||GetStatistics              || Shows statistics for all help requests             ||");
+            Console.WriteLine("|| 10 ||CloseHelpRequestAssignment || Closes an assignment help request                  ||");
+            Console.WriteLine("|| 11 ||CloseHelpRequestExercise   || Closes an exercise help request                    ||");
+            Console.WriteLine("|| 12 ||GetStatistics              || Shows statistics for all help requests             ||");
             Console.WriteLine("------------------------------------------------------------------------------------------");
+        }
+
+        static void CloseHelpRequestAssignment()
+        {
+            StudentAssignment newStudentAssignment = new StudentAssignment();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available student ID's:");
+                foreach (Student element in _UnitOfWork.Students.GetAll())
+                {
+                    Console.WriteLine(element.AUID);
+                }
+            }
+            Console.WriteLine("Enter students AUID");
+            newStudentAssignment.StudentAUID = System.Console.ReadLine();
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current assignment ID's:");
+                foreach (Assignment element in _UnitOfWork.Assignments.GetAll())
+                {
+                    Console.WriteLine(element.AssignmentID);
+                }
+            }
+            Console.WriteLine("Enter assignment ID");
+            newStudentAssignment.AssignmentID = int.Parse(System.Console.ReadLine());
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.HelpRequests.CloseHelpRequestAssignment(newStudentAssignment);
+                _UnitOfWork.Complete();
+            }
+        }
+
+        static void CloseHelpRequestExercise()
+        {
+            StudentExercise newStudentExercise = new StudentExercise();
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available student ID's:");
+                foreach (Student element in _UnitOfWork.Students.GetAll())
+                {
+                    Console.WriteLine(element.AUID);
+                }
+            }
+            Console.WriteLine("Enter students AUID");
+            newStudentExercise.StudentAUID = System.Console.ReadLine();
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current exercise numbers, lectures:");
+                foreach (Exercise element in _UnitOfWork.Exercises.GetAll())
+                {
+                    Console.WriteLine(element.Number + ", " + element.Lecture);
+                }
+            }
+            Console.WriteLine("Enter exercise number");
+            newStudentExercise.ExerciseNumber = int.Parse(System.Console.ReadLine());
+            Console.WriteLine("Enter lecture");
+            newStudentExercise.ExerciseLecture = int.Parse(System.Console.ReadLine());
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                _UnitOfWork.HelpRequests.CloseHelpRequestExercise(newStudentExercise);
+                _UnitOfWork.Complete();
+            }
         }
 
         static void CreateCourse()
