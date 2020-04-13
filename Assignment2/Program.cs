@@ -25,6 +25,7 @@ namespace Assignment2
                             break;
                         }
                     case "CreateStudent":
+<<<<<<< HEAD
                         {
                             CreateStudent();
                             break;
@@ -45,6 +46,42 @@ namespace Assignment2
                             CreateExercise();
                             break;
                         }
+=======
+                    {
+                        CreateStudent();
+                        break;
+                    }
+                    case "CreateTeacher":
+                    {
+                        CreateTeacher();
+                        break;
+                    }
+                    case "CreateAssignment":
+                    {
+                        CreateAssignment();
+                        break;
+                    }
+                    case "CreateExercise":
+                    {
+                        CreateExercise();
+                        break;
+                    }
+                    case "CreateHelpRequest":
+                    {
+                        CreateHelpRequest();
+                        break;
+                    }
+                    case "GetHelpRequestsStudent":
+                    {
+                        GetOpenHelpRequestsStudent();
+                        break;
+                    }
+                    case "GetHelpRequestsTeacher":
+                    {
+                        GetOpenHelpRequestsTeacher();
+                        break;
+                    }
+>>>>>>> 6ac6d3b350e989ef55585ced31656d21dafd381d
                     default:
                         {
                             Console.WriteLine("Illegal input! Try again.");
@@ -150,13 +187,40 @@ namespace Assignment2
 
         }
 
-        static void GetOpenHelpRequests(string teacherId, string courseId)
+        static void GetOpenHelpRequestsTeacher()
         {
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available teacher ID's:");
+                foreach (Teacher element in _UnitOfWork.Teachers.GetAll())
+                {
+                    Console.WriteLine(element.AUID);
+                }
+            }
+            Console.WriteLine("Enter teachers AUID");
+            string teacherId = System.Console.ReadLine();
 
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                Console.WriteLine("Current available course ID's:");
+                foreach (Course element in _UnitOfWork.Courses.GetAll())
+                {
+                    Console.WriteLine(element.CourseID);
+                }
+            }
+            Console.WriteLine("Enter course ID");
+            string courseId = System.Console.ReadLine();
+
+            using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
+            {
+                // Get open help requests
+            }
         }
 
-        static void GetOpenHelpRequests(string studentId)
+        static void GetOpenHelpRequestsStudent()
         {
+            Console.WriteLine("Enter a students AUID");
+            string studentId = System.Console.ReadLine();
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 System.Console.WriteLine("Current help requests in assignments:");
