@@ -29,15 +29,34 @@ namespace Assignment2
                         CreateStudent();
                         break;
                     }
+                    case "CreateTeacher":
+                    {
+                        CreateTeacher();
+                        break;
+                    }
+                    case "CreateAssignment":
+                    {
+                        CreateAssignment();
+                        break;
+                    }
+                    case "CreateExercise":
+                    {
+                        CreateExercise();
+                        break;
+                    }
+                    case "CreateHelpRequest":
+                    {
+                        CreateHelpRequest();
+                        break;
+                    }
                     case "GetHelpRequestsStudent":
                     {
-                        Console.WriteLine("Enter a students AUID");
-                        GetOpenHelpRequests(System.Console.ReadLine());
+                        GetOpenHelpRequestsStudent();
                         break;
                     }
                     case "GetHelpRequestsTeacher":
                     {
-                        Console.WriteLine("Enter teachers AUID");
+                        GetOpenHelpRequestsTeacher();
                         break;
                     }
                     default:
@@ -116,13 +135,18 @@ namespace Assignment2
 
         }
 
-        static void GetOpenHelpRequests(string teacherId, string courseId)
+        static void GetOpenHelpRequestsTeacher()
         {
-
+            Console.WriteLine("Enter teachers AUID");
+            string teacherId = System.Console.ReadLine();
+            Console.WriteLine("Enter course ID");
+            string courseId = System.Console.ReadLine();
         }
 
-        static void GetOpenHelpRequests(string studentId)
+        static void GetOpenHelpRequestsStudent()
         {
+            Console.WriteLine("Enter a students AUID");
+            string studentId = System.Console.ReadLine();
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 System.Console.WriteLine("Current help requests in assignments:");
