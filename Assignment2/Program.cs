@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Assignment2.BottomLayerPersistenceLogic;
 using Assignment2.BottomLayerPersistenceLogic.Repositories;
 using Assignment2.TopLayer.Domain;
@@ -98,6 +99,8 @@ namespace Assignment2
                             break;
                         }
                 }
+                Console.WriteLine("Press enter to continue...");
+                Console.ReadLine();
             }
         }
 
