@@ -8,7 +8,6 @@ namespace Assignment2.BottomLayerPersistenceLogic
 {
     public class StudentHelperContext : DbContext
     {
-
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
@@ -18,7 +17,6 @@ namespace Assignment2.BottomLayerPersistenceLogic
         public DbSet<Teacher> Teacher { get; set; }
         public DbSet <TeacherCourse> TeacherCourses { get; set; }
         public DbSet<StudentExercise> StudentExercises { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -7,6 +7,8 @@ namespace Assignment2.BottomLayerPersistenceLogic.EntityConfigurations
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<StudentExercise> builder)
         {
+            builder.Property(p => p.IsOpen)
+                .HasDefaultValue(true);
             builder.HasKey(se => new {se.StudentAUID, se.ExerciseLecture, se.ExerciseNumber});
             builder.HasOne(se => se.Student)
                 .WithMany(s => s.StudentExercises)

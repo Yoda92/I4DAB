@@ -87,7 +87,7 @@ namespace Assignment2
             Console.WriteLine("Please enter the name of the new student:");
             newStudent.Name = Console.ReadLine();
             Console.WriteLine("Please enter the AUID of the new student:");
-            newStudent.Name = Console.ReadLine();
+            newStudent.AUID = Console.ReadLine();
             using (var _UnitOfWork = new UnitOfWork(new StudentHelperContext()))
             {
                 _UnitOfWork.Students.Add(newStudent);
