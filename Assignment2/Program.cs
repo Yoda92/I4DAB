@@ -19,49 +19,64 @@ namespace Assignment2
                 input = Console.ReadLine();
                 switch (input)
                 {
+                    case "1":
                     case "CreateCourse":
                         {
                             CreateCourse();
                             break;
                         }
+                    case "2":
                     case "CreateStudent":
                         {
                             CreateStudent();
                             break;
                         }
+                    case "3":
                     case "CreateTeacher":
                         {
                             CreateTeacher();
                             break;
                         }
+                    case "4":
                     case "CreateAssignment":
                         {
                             CreateAssignment();
                             break;
                         }
+                    case "5":
                     case "CreateExercise":
                         {
                             CreateExercise();
                             break;
                         }
+                    case "6":
                     case "CreateHelpRequestAssignment":
                         {
                             CreateHelpRequestAssignment();
                             break;
                         }
+                    case "7":
                     case "CreateHelpRequestExercise":
-                    {
-                        CreateHelpRequestExercise();
-                        break;
-                    }
+                        {
+                            CreateHelpRequestExercise();
+                            break;
+                        }
+                    case "8":
                     case "GetHelpRequestsStudent":
                         {
                             GetOpenHelpRequestsStudent();
                             break;
                         }
+                    case "9":
                     case "GetHelpRequestsTeacher":
                         {
                             GetOpenHelpRequestsTeacher();
+                            break;
+                        }
+                    case "10":
+                    case "GetStatistics":
+                        {
+                            GetStatistics();
                             break;
                         }
                     default:
@@ -75,22 +90,22 @@ namespace Assignment2
 
         static void InitMessage()
         {
-            Console.WriteLine("-------------------------------------------------------------------------------------");
-            Console.WriteLine("||                       HELP REQUEST DATABASE PROGRAM 3000                         ||");
-            Console.WriteLine("-------------------------------------------------------------------------------------");
-            Console.WriteLine("|| List of commands           || Description                                        ||");
-            Console.WriteLine("-------------------------------------------------------------------------------------");
-            Console.WriteLine("|| CreateCourse               || Creates a new course.                              ||");
-            Console.WriteLine("|| CreateStudent              || Creates a new student                              ||");
-            Console.WriteLine("|| CreateTeacher              || Creates a new teacher.                             ||");
-            Console.WriteLine("|| CreateAssignment           || Creates a new assignment.                          ||");
-            Console.WriteLine("|| CreateExercise             || Creates a new exercise.                            ||");
-            Console.WriteLine("|| CreateHelpRequestAssignment|| Creates a new assignment help request.             ||");
-            Console.WriteLine("|| CreateHelpRequestExercise  || Creates a new exercise help request.               ||");
-            Console.WriteLine("|| GetHelpRequestsStudent     || Shows all open help request given a student.       ||");
-            Console.WriteLine("|| GetHelpRequestsTeacher     || Shows all open help request given a teacher.       ||");
-            Console.WriteLine("|| GetStatistics              || Shows statistics for all help requests             ||");
-            Console.WriteLine("-------------------------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            Console.WriteLine("||                       HELP REQUEST DATABASE PROGRAM 3000                              ||");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            Console.WriteLine("|| ID ||List of commands           || Description                                        ||");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
+            Console.WriteLine("|| 1  ||CreateCourse               || Creates a new course.                              ||");
+            Console.WriteLine("|| 2  ||CreateStudent              || Creates a new student                              ||");
+            Console.WriteLine("|| 3  ||CreateTeacher              || Creates a new teacher.                             ||");
+            Console.WriteLine("|| 4  ||CreateAssignment           || Creates a new assignment.                          ||");
+            Console.WriteLine("|| 5  ||CreateExercise             || Creates a new exercise.                            ||");
+            Console.WriteLine("|| 6  ||CreateHelpRequestAssignment|| Creates a new assignment help request.             ||");
+            Console.WriteLine("|| 7  ||CreateHelpRequestExercise  || Creates a new exercise help request.               ||");
+            Console.WriteLine("|| 8  ||GetHelpRequestsStudent     || Shows all open help request given a student.       ||");
+            Console.WriteLine("|| 9  ||GetHelpRequestsTeacher     || Shows all open help request given a teacher.       ||");
+            Console.WriteLine("|| 10 ||GetStatistics              || Shows statistics for all help requests             ||");
+            Console.WriteLine("------------------------------------------------------------------------------------------");
         }
 
         static void CreateCourse()
